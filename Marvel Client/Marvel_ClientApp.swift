@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Marvel_ClientApp: App {
+struct MarvelApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {

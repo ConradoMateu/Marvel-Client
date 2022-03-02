@@ -143,6 +143,7 @@
 				9BBC2C9027D003AE00BEAA26 /* Sources */,
 				9BBC2C9127D003AE00BEAA26 /* Frameworks */,
 				9BBC2C9227D003AE00BEAA26 /* Resources */,
+				9BBC2CCB27D02E9300BEAA26 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -257,6 +258,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9BBC2CCB27D02E9300BEAA26 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"SwiftLint is not installed run: brew install swiftlint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9BBC2C9027D003AE00BEAA26 /* Sources */ = {
