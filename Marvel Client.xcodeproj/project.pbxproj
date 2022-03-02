@@ -16,6 +16,7 @@
 		9BBC2CAE27D003AF00BEAA26 /* Marvel_ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CAD27D003AF00BEAA26 /* Marvel_ClientTests.swift */; };
 		9BBC2CB827D003AF00BEAA26 /* Marvel_ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CB727D003AF00BEAA26 /* Marvel_ClientUITests.swift */; };
 		9BBC2CBA27D003AF00BEAA26 /* Marvel_ClientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CB927D003AF00BEAA26 /* Marvel_ClientUITestsLaunchTests.swift */; };
+		9BBC2CD227D033C300BEAA26 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9BBC2CD127D033C300BEAA26 /* CachedAsyncImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BBC2CD227D033C300BEAA26 /* CachedAsyncImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +152,9 @@
 			dependencies = (
 			);
 			name = "Marvel Client";
+			packageProductDependencies = (
+				9BBC2CD127D033C300BEAA26 /* CachedAsyncImage */,
+			);
 			productName = "Marvel Client";
 			productReference = 9BBC2C9427D003AE00BEAA26 /* Marvel Client.app */;
 			productType = "com.apple.product-type.application";
@@ -222,6 +227,9 @@
 				Base,
 			);
 			mainGroup = 9BBC2C8B27D003AE00BEAA26;
+			packageReferences = (
+				9BBC2CD027D033C300BEAA26 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+			);
 			productRefGroup = 9BBC2C9527D003AE00BEAA26 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -615,6 +623,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9BBC2CD027D033C300BEAA26 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9BBC2CD127D033C300BEAA26 /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BBC2CD027D033C300BEAA26 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9BBC2CA227D003AF00BEAA26 /* Marvel_Client.xcdatamodeld */ = {
