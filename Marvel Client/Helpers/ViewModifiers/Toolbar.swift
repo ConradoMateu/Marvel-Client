@@ -17,27 +17,20 @@ struct Toolbar: ViewModifier {
     var deleteAllItems: () -> Void
 
     func body(content: Content) -> some View {
-        content.toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: toggleThemeChange) {
-                    Label("Change Theme", systemImage: isDarkMode ? "sun.max.fill" : "moon.fill")
+        content
+            .themeSwitcher()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: addItem) {
+                        Label("Add Item", systemImage: "plus")
+                    }
                 }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: addItem) {
-                    Label("Add Item", systemImage: "plus")
+                ToolbarItem {
+                    Button(action: deleteAllItems) {
+                        Text("Clear")
+                    }
                 }
-            }
-            ToolbarItem {
-                Button(action: deleteAllItems) {
-                    Text("Clear")
-                }
-            }
         }
-    }
-
-    func toggleThemeChange() {
-        isDarkMode.toggle()
     }
 }
 

@@ -34,6 +34,12 @@
 		9BBC2CF327D06E2F00BEAA26 /* HeroeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */; };
 		9BBC2CF427D06E2F00BEAA26 /* HeroeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */; };
 		9BBC2CF527D06E2F00BEAA26 /* HeroeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */; };
+		9BBC2CFD27D07E1500BEAA26 /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CFC27D07E1500BEAA26 /* DetailRow.swift */; };
+		9BBC2CFE27D07E1500BEAA26 /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CFC27D07E1500BEAA26 /* DetailRow.swift */; };
+		9BBC2CFF27D07E1500BEAA26 /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CFC27D07E1500BEAA26 /* DetailRow.swift */; };
+		9BBC2D0127D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */; };
+		9BBC2D0227D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */; };
+		9BBC2D0327D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +80,8 @@
 		9BBC2CED27D0619200BEAA26 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeRow.swift; sourceTree = "<group>"; };
 		9BBC2CFB27D075F100BEAA26 /* Marvel-Client-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Marvel-Client-Info.plist"; sourceTree = SOURCE_ROOT; };
+		9BBC2CFC27D07E1500BEAA26 /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
+		9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +204,7 @@
 			children = (
 				9BBC2C9927D003AE00BEAA26 /* ContentView.swift */,
 				9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */,
+				9BBC2CFC27D07E1500BEAA26 /* DetailRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				9BBC2CED27D0619200BEAA26 /* Toolbar.swift */,
+				9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -371,7 +381,9 @@
 			files = (
 				9BBC2CEE27D0619200BEAA26 /* Toolbar.swift in Sources */,
 				9BBC2CA127D003AF00BEAA26 /* Persistence.swift in Sources */,
+				9BBC2D0127D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */,
 				9BBC2C9A27D003AE00BEAA26 /* ContentView.swift in Sources */,
+				9BBC2CFD27D07E1500BEAA26 /* DetailRow.swift in Sources */,
 				9BBC2C9827D003AE00BEAA26 /* Marvel_ClientApp.swift in Sources */,
 				9BBC2CF327D06E2F00BEAA26 /* HeroeRow.swift in Sources */,
 				9BBC2CE527D057C300BEAA26 /* JSONFile.swift in Sources */,
@@ -387,10 +399,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBC2CAE27D003AF00BEAA26 /* JSONLFileTests.swift in Sources */,
+				9BBC2D0227D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */,
 				9BBC2CE627D057C300BEAA26 /* JSONFile.swift in Sources */,
 				9BBC2CEB27D058AF00BEAA26 /* Thumbnail.swift in Sources */,
 				9BBC2CEF27D0619200BEAA26 /* Toolbar.swift in Sources */,
 				9BBC2CF427D06E2F00BEAA26 /* HeroeRow.swift in Sources */,
+				9BBC2CFE27D07E1500BEAA26 /* DetailRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +414,9 @@
 			files = (
 				9BBC2CF527D06E2F00BEAA26 /* HeroeRow.swift in Sources */,
 				9BBC2CBA27D003AF00BEAA26 /* Marvel_ClientUITestsLaunchTests.swift in Sources */,
+				9BBC2D0327D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */,
 				9BBC2CB827D003AF00BEAA26 /* Marvel_ClientUITests.swift in Sources */,
+				9BBC2CFF27D07E1500BEAA26 /* DetailRow.swift in Sources */,
 				9BBC2CF027D0619200BEAA26 /* Toolbar.swift in Sources */,
 				9BBC2CEC27D058AF00BEAA26 /* Thumbnail.swift in Sources */,
 				9BBC2CE727D057C300BEAA26 /* JSONFile.swift in Sources */,

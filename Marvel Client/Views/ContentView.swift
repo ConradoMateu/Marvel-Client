@@ -20,6 +20,7 @@ struct ContentView: View {
 
     @JSONFile(named: "response")
     var response: HeroeResponse?
+    @State var isNavigationActive = false
 
     var heroes: [Heroe]? {
         response?.data.heroes
@@ -30,12 +31,15 @@ struct ContentView: View {
             VStack {
                 List {
                     if let safeHeroes = heroes {
-                        ForEach(safeHeroes) { item in
-                            NavigationLink {
-                                Text(item.name)
-                            } label: {
-                                HeroeRow(heroe: item)
-                            }
+                        VStack {
+                            ForEach(safeHeroes) { item in
+                                NavigationLink(isActive: self.$isNavigationActive) {
+                                    Text(item.name)
+                                } label: {
+                                    HeroeRow(heroe: item)
+                                }
+                        }
+
                         }
 //                        .onDelete(perform: deleteItems)
                     }
