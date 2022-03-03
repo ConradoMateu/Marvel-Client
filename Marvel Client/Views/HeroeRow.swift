@@ -14,9 +14,9 @@ struct HeroeRow: View {
 
         HStack {
             CachedAsyncImage(url: heroe.imageURL, content: { image in
-                image.brandedStyle()
+                image.brandedThmbnail()
             }, placeholder: {
-                Image("placeholder").brandedStyle()
+                Image("placeholder").brandedThmbnail()
             })
 
             VStack(alignment: .leading, spacing: 5) {
@@ -38,7 +38,7 @@ struct HeroeRow: View {
 }
 
 extension Image {
-    func brandedStyle() -> some View {
+    func brandedThmbnail() -> some View {
         self.resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 70, height: 100)

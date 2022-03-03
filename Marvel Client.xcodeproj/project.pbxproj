@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B8566D727D10C0500699FB6 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8566D627D10C0500699FB6 /* Comic.swift */; };
 		9BBC2C9827D003AE00BEAA26 /* Marvel_ClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2C9727D003AE00BEAA26 /* Marvel_ClientApp.swift */; };
 		9BBC2C9A27D003AE00BEAA26 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2C9927D003AE00BEAA26 /* ContentView.swift */; };
 		9BBC2C9C27D003AF00BEAA26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BBC2C9B27D003AF00BEAA26 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B8566D627D10C0500699FB6 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		9BBC2C9427D003AE00BEAA26 /* Marvel Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBC2C9727D003AE00BEAA26 /* Marvel_ClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marvel_ClientApp.swift; sourceTree = "<group>"; };
 		9BBC2C9927D003AE00BEAA26 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		9BBC2CD327D0349100BEAA26 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9B8566D627D10C0500699FB6 /* Comic.swift */,
 				9BBC2CD427D034A200BEAA26 /* HeroeResponse.swift */,
 				9BBC2CD627D0354100BEAA26 /* Heroe.swift */,
 				9BBC2CE927D058AF00BEAA26 /* Thumbnail.swift */,
@@ -388,6 +391,7 @@
 				9BBC2CF327D06E2F00BEAA26 /* HeroeRow.swift in Sources */,
 				9BBC2CE527D057C300BEAA26 /* JSONFile.swift in Sources */,
 				9BBC2CA427D003AF00BEAA26 /* Marvel_Client.xcdatamodeld in Sources */,
+				9B8566D727D10C0500699FB6 /* Comic.swift in Sources */,
 				9BBC2CD527D034A200BEAA26 /* HeroeResponse.swift in Sources */,
 				9BBC2CEA27D058AF00BEAA26 /* Thumbnail.swift in Sources */,
 				9BBC2CD727D0354100BEAA26 /* Heroe.swift in Sources */,

@@ -6,13 +6,43 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct DetailRow: View {
-    var heroe: Heroe
+    @State var heroe: Heroe
     var body: some View {
         VStack {
-            
-        }
+            CachedAsyncImage(url: heroe.imageURL, content: { image in
+                image.brandedDetail()
+            }, placeholder: {
+                Image("placeholder").brandedDetail()
+            })
+
+            List(heroe.comicResponse.comics) { comic in
+                Text(comic.name)
+            }
+            .toolbar {
+                ToolbarItem {
+                    Button(action: triggerFavoriteButton) {
+                        Label("Add Favorite Heroe", systemImage: heroe.isFavorite ? "star.fill" : "star")
+                    }
+                }
+            }
+        }.padding(.top, 50)
+         .navigationTitle(heroe.name)
+         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    func triggerFavoriteButton() {
+        heroe.isFavorite.toggle()
+    }
+}
+
+extension Image {
+    func brandedDetail() -> some View {
+        self.resizable()
+            .aspectRatio(contentMode: ContentMode.fill)
+            .frame(maxWidth: .infinity, maxHeight: 300)
     }
 }
 

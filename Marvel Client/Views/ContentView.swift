@@ -33,7 +33,7 @@ struct ContentView: View {
                     List(safeHeroes, id: \.name) { item in
                         VStack {
                             NavigationLink {
-                                Text(item.name)
+                                DetailRow(heroe: item)
                             } label: {
                                 HeroeRow(heroe: item)
                             }
