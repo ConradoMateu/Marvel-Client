@@ -9,6 +9,8 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+
+    // Core Data Variables
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -16,32 +18,27 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
 
+    @JSONFile(named: "response")
+    var response: HeroeResponse?
+
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+            VStack {
+                List {
+                    ForEach(items) { item in
+                        NavigationLink {
+                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        } label: {
+                            Text(item.timestamp!, formatter: itemFormatter)
+                        }
                     }
+                    .onDelete(perform: deleteItems)
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-                ToolbarItem {
-                    Button(action: deleteAllItems) {
-                        Text("Clear")
-                    }
-                }
-            } .navigationTitle("Heroes")
-            Text("Select an item")
-        }
+
+                Text("Select A Hero To See Details")
+            }.makeToolbarItems(addItem: addItem, deleteItem: deleteAllItems)
+            .navigationTitle("Heroes")
+        } .navigationViewStyle(.stack)
     }
 
     private func addItem() {
