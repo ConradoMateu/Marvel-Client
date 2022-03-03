@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct Heroe: Codable {
+struct Heroe: Codable, Identifiable {
     var id: UUID = UUID()
     let name: String
-    let description: String?
+    let description: String
+
     let thumbnail: Thumbnail
 
     /// Adding CodingKeys in order to Avoid `id` from being decoded

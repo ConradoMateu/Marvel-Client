@@ -31,6 +31,9 @@
 		9BBC2CEE27D0619200BEAA26 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CED27D0619200BEAA26 /* Toolbar.swift */; };
 		9BBC2CEF27D0619200BEAA26 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CED27D0619200BEAA26 /* Toolbar.swift */; };
 		9BBC2CF027D0619200BEAA26 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CED27D0619200BEAA26 /* Toolbar.swift */; };
+		9BBC2CF327D06E2F00BEAA26 /* HeroeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */; };
+		9BBC2CF427D06E2F00BEAA26 /* HeroeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */; };
+		9BBC2CF527D06E2F00BEAA26 /* HeroeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,8 @@
 		9BBC2CE427D057C300BEAA26 /* JSONFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFile.swift; sourceTree = "<group>"; };
 		9BBC2CE927D058AF00BEAA26 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		9BBC2CED27D0619200BEAA26 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeRow.swift; sourceTree = "<group>"; };
+		9BBC2CFB27D075F100BEAA26 /* Marvel-Client-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Marvel-Client-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,10 +125,11 @@
 		9BBC2C9627D003AE00BEAA26 /* Marvel Client */ = {
 			isa = PBXGroup;
 			children = (
+				9BBC2CFB27D075F100BEAA26 /* Marvel-Client-Info.plist */,
+				9BBC2CF127D06E1D00BEAA26 /* Views */,
 				9BBC2CDE27D0570A00BEAA26 /* Helpers */,
 				9BBC2CD327D0349100BEAA26 /* Model */,
 				9BBC2C9727D003AE00BEAA26 /* Marvel_ClientApp.swift */,
-				9BBC2C9927D003AE00BEAA26 /* ContentView.swift */,
 				9BBC2C9B27D003AF00BEAA26 /* Assets.xcassets */,
 				9BBC2CA027D003AF00BEAA26 /* Persistence.swift */,
 				9BBC2CA227D003AF00BEAA26 /* Marvel_Client.xcdatamodeld */,
@@ -170,8 +176,8 @@
 		9BBC2CDE27D0570A00BEAA26 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				9BBC2CF627D072AC00BEAA26 /* ViewModifiers */,
 				9BBC2CDF27D0570F00BEAA26 /* JSON */,
-				9BBC2CED27D0619200BEAA26 /* Toolbar.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -183,6 +189,23 @@
 				9BBC2CE427D057C300BEAA26 /* JSONFile.swift */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		9BBC2CF127D06E1D00BEAA26 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9BBC2C9927D003AE00BEAA26 /* ContentView.swift */,
+				9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9BBC2CF627D072AC00BEAA26 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				9BBC2CED27D0619200BEAA26 /* Toolbar.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,6 +373,7 @@
 				9BBC2CA127D003AF00BEAA26 /* Persistence.swift in Sources */,
 				9BBC2C9A27D003AE00BEAA26 /* ContentView.swift in Sources */,
 				9BBC2C9827D003AE00BEAA26 /* Marvel_ClientApp.swift in Sources */,
+				9BBC2CF327D06E2F00BEAA26 /* HeroeRow.swift in Sources */,
 				9BBC2CE527D057C300BEAA26 /* JSONFile.swift in Sources */,
 				9BBC2CA427D003AF00BEAA26 /* Marvel_Client.xcdatamodeld in Sources */,
 				9BBC2CD527D034A200BEAA26 /* HeroeResponse.swift in Sources */,
@@ -366,6 +390,7 @@
 				9BBC2CE627D057C300BEAA26 /* JSONFile.swift in Sources */,
 				9BBC2CEB27D058AF00BEAA26 /* Thumbnail.swift in Sources */,
 				9BBC2CEF27D0619200BEAA26 /* Toolbar.swift in Sources */,
+				9BBC2CF427D06E2F00BEAA26 /* HeroeRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BBC2CF527D06E2F00BEAA26 /* HeroeRow.swift in Sources */,
 				9BBC2CBA27D003AF00BEAA26 /* Marvel_ClientUITestsLaunchTests.swift in Sources */,
 				9BBC2CB827D003AF00BEAA26 /* Marvel_ClientUITests.swift in Sources */,
 				9BBC2CF027D0619200BEAA26 /* Toolbar.swift in Sources */,
@@ -524,6 +550,7 @@
 				DEVELOPMENT_TEAM = DGMNFK6RD3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Marvel-Client-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -553,6 +580,7 @@
 				DEVELOPMENT_TEAM = DGMNFK6RD3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Marvel-Client-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

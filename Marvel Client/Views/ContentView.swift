@@ -21,18 +21,25 @@ struct ContentView: View {
     @JSONFile(named: "response")
     var response: HeroeResponse?
 
+    var heroes: [Heroe]? {
+        response?.data.heroes
+    }
+
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach(items) { item in
-                        NavigationLink {
-                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                        } label: {
-                            Text(item.timestamp!, formatter: itemFormatter)
+                    if let safeHeroes = heroes {
+                        ForEach(safeHeroes) { item in
+                            NavigationLink {
+                                Text(item.name)
+                            } label: {
+                                HeroeRow(heroe: item)
+                            }
                         }
+//                        .onDelete(perform: deleteItems)
                     }
-                    .onDelete(perform: deleteItems)
+
                 }
 
                 Text("Select A Hero To See Details")
