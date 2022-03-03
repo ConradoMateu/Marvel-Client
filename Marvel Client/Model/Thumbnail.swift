@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Thumbnail: Codable {
+struct Thumbnail: Codable, Hashable {
     let path: String
     let thumbnailExtension: Extension
 

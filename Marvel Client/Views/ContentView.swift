@@ -29,26 +29,20 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                List {
-                    if let safeHeroes = heroes {
+                if let safeHeroes = heroes {
+                    List(safeHeroes, id: \.name) { item in
                         VStack {
-                            ForEach(safeHeroes) { item in
-                                NavigationLink(isActive: self.$isNavigationActive) {
-                                    Text(item.name)
-                                } label: {
-                                    HeroeRow(heroe: item)
-                                }
+                            NavigationLink {
+                                Text(item.name)
+                            } label: {
+                                HeroeRow(heroe: item)
+                            }
                         }
-
-                        }
-//                        .onDelete(perform: deleteItems)
                     }
-
                 }
-
                 Text("Select A Hero To See Details")
             }.makeToolbarItems(addItem: addItem, deleteItem: deleteAllItems)
-            .navigationTitle("Heroes")
+                .navigationTitle("Heroes")
         } .navigationViewStyle(.stack)
     }
 

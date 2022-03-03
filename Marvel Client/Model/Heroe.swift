@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct Heroe: Codable, Identifiable {
+struct Heroe: Codable, Identifiable, Hashable {
+
+    static func == (lhs: Heroe, rhs: Heroe) -> Bool {
+        lhs.id == rhs.id && lhs.name == rhs.name && lhs.thumbnail == rhs.thumbnail
+    }
+
     var id: UUID = UUID()
     let name: String
     let description: String
