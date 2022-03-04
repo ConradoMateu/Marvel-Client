@@ -18,7 +18,7 @@ struct DetailRow: View {
                 Image("placeholder").brandedDetail()
             })
 
-            List(heroe.comicResponse.comics) { comic in
+            List(heroe.comics) { comic in
                 Text(comic.name)
             }
             .toolbar {
@@ -51,6 +51,6 @@ struct DetailRow_Previews: PreviewProvider {
     static var response: HeroeResponse?
 
     static var previews: some View {
-        response?.data.heroes.first.map { DetailRow(heroe: $0)}
+        response?.heroes.randomElement().map { DetailRow(heroe: $0)}
     }
 }

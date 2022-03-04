@@ -26,9 +26,6 @@
 		9BBC2CE527D057C300BEAA26 /* JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CE427D057C300BEAA26 /* JSONFile.swift */; };
 		9BBC2CE627D057C300BEAA26 /* JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CE427D057C300BEAA26 /* JSONFile.swift */; };
 		9BBC2CE727D057C300BEAA26 /* JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CE427D057C300BEAA26 /* JSONFile.swift */; };
-		9BBC2CEA27D058AF00BEAA26 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CE927D058AF00BEAA26 /* Thumbnail.swift */; };
-		9BBC2CEB27D058AF00BEAA26 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CE927D058AF00BEAA26 /* Thumbnail.swift */; };
-		9BBC2CEC27D058AF00BEAA26 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CE927D058AF00BEAA26 /* Thumbnail.swift */; };
 		9BBC2CEE27D0619200BEAA26 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CED27D0619200BEAA26 /* Toolbar.swift */; };
 		9BBC2CEF27D0619200BEAA26 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CED27D0619200BEAA26 /* Toolbar.swift */; };
 		9BBC2CF027D0619200BEAA26 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CED27D0619200BEAA26 /* Toolbar.swift */; };
@@ -41,6 +38,8 @@
 		9BBC2D0127D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */; };
 		9BBC2D0227D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */; };
 		9BBC2D0327D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */; };
+		9BF2E0CE27D19A2E00F0E400 /* NestedCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF2E0CD27D19A2E00F0E400 /* NestedCodable.swift */; };
+		9BF2E0D127D19CAE00F0E400 /* BackedCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF2E0D027D19CAE00F0E400 /* BackedCodable */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,12 +77,12 @@
 		9BBC2CD627D0354100BEAA26 /* Heroe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heroe.swift; sourceTree = "<group>"; };
 		9BBC2CE027D0571C00BEAA26 /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
 		9BBC2CE427D057C300BEAA26 /* JSONFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFile.swift; sourceTree = "<group>"; };
-		9BBC2CE927D058AF00BEAA26 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		9BBC2CED27D0619200BEAA26 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		9BBC2CF227D06E2F00BEAA26 /* HeroeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeRow.swift; sourceTree = "<group>"; };
 		9BBC2CFB27D075F100BEAA26 /* Marvel-Client-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Marvel-Client-Info.plist"; sourceTree = SOURCE_ROOT; };
 		9BBC2CFC27D07E1500BEAA26 /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitcher.swift; sourceTree = "<group>"; };
+		9BF2E0CD27D19A2E00F0E400 /* NestedCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCodable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBC2CD227D033C300BEAA26 /* CachedAsyncImage in Frameworks */,
+				9BF2E0D127D19CAE00F0E400 /* BackedCodable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +179,6 @@
 				9B8566D627D10C0500699FB6 /* Comic.swift */,
 				9BBC2CD427D034A200BEAA26 /* HeroeResponse.swift */,
 				9BBC2CD627D0354100BEAA26 /* Heroe.swift */,
-				9BBC2CE927D058AF00BEAA26 /* Thumbnail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -189,6 +188,7 @@
 			children = (
 				9BBC2CF627D072AC00BEAA26 /* ViewModifiers */,
 				9BBC2CDF27D0570F00BEAA26 /* JSON */,
+				9BF2E0CD27D19A2E00F0E400 /* NestedCodable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -240,6 +240,7 @@
 			name = "Marvel Client";
 			packageProductDependencies = (
 				9BBC2CD127D033C300BEAA26 /* CachedAsyncImage */,
+				9BF2E0D027D19CAE00F0E400 /* BackedCodable */,
 			);
 			productName = "Marvel Client";
 			productReference = 9BBC2C9427D003AE00BEAA26 /* Marvel Client.app */;
@@ -315,6 +316,7 @@
 			mainGroup = 9BBC2C8B27D003AE00BEAA26;
 			packageReferences = (
 				9BBC2CD027D033C300BEAA26 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				9BF2E0CF27D19CAE00F0E400 /* XCRemoteSwiftPackageReference "BackedCodable" */,
 			);
 			productRefGroup = 9BBC2C9527D003AE00BEAA26 /* Products */;
 			projectDirPath = "";
@@ -393,7 +395,7 @@
 				9BBC2CA427D003AF00BEAA26 /* Marvel_Client.xcdatamodeld in Sources */,
 				9B8566D727D10C0500699FB6 /* Comic.swift in Sources */,
 				9BBC2CD527D034A200BEAA26 /* HeroeResponse.swift in Sources */,
-				9BBC2CEA27D058AF00BEAA26 /* Thumbnail.swift in Sources */,
+				9BF2E0CE27D19A2E00F0E400 /* NestedCodable.swift in Sources */,
 				9BBC2CD727D0354100BEAA26 /* Heroe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,7 +407,6 @@
 				9BBC2CAE27D003AF00BEAA26 /* JSONLFileTests.swift in Sources */,
 				9BBC2D0227D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */,
 				9BBC2CE627D057C300BEAA26 /* JSONFile.swift in Sources */,
-				9BBC2CEB27D058AF00BEAA26 /* Thumbnail.swift in Sources */,
 				9BBC2CEF27D0619200BEAA26 /* Toolbar.swift in Sources */,
 				9BBC2CF427D06E2F00BEAA26 /* HeroeRow.swift in Sources */,
 				9BBC2CFE27D07E1500BEAA26 /* DetailRow.swift in Sources */,
@@ -422,7 +423,6 @@
 				9BBC2CB827D003AF00BEAA26 /* Marvel_ClientUITests.swift in Sources */,
 				9BBC2CFF27D07E1500BEAA26 /* DetailRow.swift in Sources */,
 				9BBC2CF027D0619200BEAA26 /* Toolbar.swift in Sources */,
-				9BBC2CEC27D058AF00BEAA26 /* Thumbnail.swift in Sources */,
 				9BBC2CE727D057C300BEAA26 /* JSONFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -745,6 +745,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		9BF2E0CF27D19CAE00F0E400 /* XCRemoteSwiftPackageReference "BackedCodable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jegnux/BackedCodable";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -752,6 +760,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9BBC2CD027D033C300BEAA26 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
 			productName = CachedAsyncImage;
+		};
+		9BF2E0D027D19CAE00F0E400 /* BackedCodable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF2E0CF27D19CAE00F0E400 /* XCRemoteSwiftPackageReference "BackedCodable" */;
+			productName = BackedCodable;
 		};
 /* End XCSwiftPackageProductDependency section */
 

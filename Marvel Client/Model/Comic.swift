@@ -7,13 +7,6 @@
 
 import Foundation
 
-struct ComicResponse: Codable, Hashable {
-    let comics: [Comic]
-    private enum CodingKeys: String, CodingKey {
-        case comics = "items"
-    }
-}
-
 struct Comic: Codable, Hashable, Identifiable {
     var id: UUID = UUID()
 

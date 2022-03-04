@@ -6,29 +6,39 @@
 //
 
 import Foundation
+import BackedCodable
 
-struct Heroe: Codable, Identifiable, Hashable {
+struct Heroe: BackedDecodable, Identifiable, Hashable {
 
     var id: UUID = UUID()
     var isFavorite: Bool = false
-    let name: String
-    let description: String
-    let thumbnail: Thumbnail
-    let comicResponse: ComicResponse
+
+    @Backed()
+    var name: String
+
+    @Backed()
+    var description: String
+
+    @Backed(Path("thumbnail", "path"))
+    var imagePath: String
+
+    @Backed(Path("thumbnail", "extension"))
+    var imageExtension: String
+
+    @Backed(Path("comics", "items"))
+    var comics: [Comic]
+
+    init(_: DeferredDecoder) { }
 
     static func == (lhs: Heroe, rhs: Heroe) -> Bool {
-        lhs.id == rhs.id && lhs.name == rhs.name && lhs.thumbnail == rhs.thumbnail
+        lhs.id == rhs.id && lhs.name == rhs.name && lhs.imageURL == rhs.imageURL
     }
 
-    /// Adding CodingKeys in order to Avoid `id` from being decoded
-    private enum CodingKeys: String, CodingKey {
-        case name, description, thumbnail, comicResponse = "comics"
-    }
 }
 
 extension Heroe {
     var imageURL: URL {
-        let urlString = String("\(thumbnail.path).\(thumbnail.thumbnailExtension.rawValue)")
+        let urlString = String("\(imagePath).\(imageExtension)")
         return URL(string: urlString)!
     }
 }

@@ -6,14 +6,13 @@
 //
 
 import Foundation
+import BackedCodable
 
-struct HeroeResponse: Codable {
-    let data: DataClass
-}
+/// Using BackedDecodable in order to decode nested JSON with property wrappers
+struct HeroeResponse: BackedDecodable {
+    init(_: DeferredDecoder) {}
 
-struct DataClass: Codable {
-    let heroes: [Heroe]
-    enum CodingKeys: String, CodingKey {
-        case heroes = "results"
-    }
+    /// Uses custom path for nested JSON
+    @Backed(Path("data", "results"))
+    var heroes: [Heroe]
 }

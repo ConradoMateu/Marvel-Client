@@ -51,6 +51,6 @@ struct HeroeRow_Previews: PreviewProvider {
     static var response: HeroeResponse?
 
     static var previews: some View {
-        response?.data.heroes.first.map { HeroeRow(heroe: $0)}
+        response?.heroes.first.map { HeroeRow(heroe: $0)}
     }
 }

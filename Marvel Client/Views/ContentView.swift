@@ -23,7 +23,7 @@ struct ContentView: View {
     @State var isNavigationActive = false
 
     var heroes: [Heroe]? {
-        response?.data.heroes
+        response?.heroes
     }
 
     var body: some View {
