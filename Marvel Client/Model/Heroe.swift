@@ -8,6 +8,7 @@
 import Foundation
 import BackedCodable
 
+/// Using BackedDecodable in order to decode nested JSON with property wrappers
 struct Heroe: BackedDecodable, Identifiable, Hashable {
 
     var id: UUID = UUID()
@@ -19,6 +20,7 @@ struct Heroe: BackedDecodable, Identifiable, Hashable {
     @Backed()
     var description: String
 
+    /// Uses custom path for nested JSON
     @Backed(Path("thumbnail", "path"))
     var imagePath: String
 
@@ -28,6 +30,7 @@ struct Heroe: BackedDecodable, Identifiable, Hashable {
     @Backed(Path("comics", "items"))
     var comics: [Comic]
 
+    /// Default init for Backed Framework
     init(_: DeferredDecoder) { }
 
     static func == (lhs: Heroe, rhs: Heroe) -> Bool {
