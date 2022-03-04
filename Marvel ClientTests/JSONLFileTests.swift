@@ -11,7 +11,7 @@ import XCTest
 class JSONFileTests: XCTestCase {
 
     @JSONFile(named: "response")
-    var response: HeroeResponse?
+    var response: HeroeResponseDTO?
 
     func testShouldProperlyDecodeLocalJSON() throws {
         assert(response != nil)

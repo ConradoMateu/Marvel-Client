@@ -19,10 +19,10 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
 
     @JSONFile(named: "response")
-    var response: HeroeResponse?
+    var response: HeroeResponseDTO?
     @State var isNavigationActive = false
 
-    var heroes: [Heroe]? {
+    var heroes: [HeroeDTO]? {
         response?.heroes
     }
 

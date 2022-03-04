@@ -9,7 +9,7 @@ import SwiftUI
 import CachedAsyncImage
 
 struct DetailRow: View {
-    @State var heroe: Heroe
+    @State var heroe: HeroeDTO
     var body: some View {
         VStack {
             CachedAsyncImage(url: heroe.imageURL, content: { image in
@@ -48,7 +48,7 @@ extension Image {
 
 struct DetailRow_Previews: PreviewProvider {
     @JSONFile(named: "response")
-    static var response: HeroeResponse?
+    static var response: HeroeResponseDTO?
 
     static var previews: some View {
         response?.heroes.randomElement().map { DetailRow(heroe: $0)}
