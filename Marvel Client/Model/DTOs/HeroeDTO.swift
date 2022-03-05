@@ -9,8 +9,9 @@ import Foundation
 import BackedCodable
 
 /// Using BackedDecodable in order to decode nested JSON with property wrappers
-struct HeroeDTO: BackedDecodable, Identifiable, Hashable {
+struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable {
 
+    
     var id: UUID = UUID()
     var isFavorite: Bool = false
 

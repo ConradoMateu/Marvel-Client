@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// This Property wrapper allows to easily decoding JSON files
 @propertyWrapper struct JSONFile<DataType: Decodable> {
     let named: String
     let type: String = "json"

@@ -8,9 +8,10 @@
 import Foundation
 import SwiftUI
 
+/// Toolbar View Modifier In Order to Abstract this layer (thinking about maintenance if the project becomes bigger)
 struct ThemeSwitcher: ViewModifier {
 
-    // Used To Change Theme Programatically
+    // Used To Change Theme Programmatically
     @AppStorage("isDarkMode") private var isDarkMode = false
 
     func body(content: Content) -> some View {

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Toolbar: ViewModifier {
 
-    // Used To Change Theme Programatically
+    // Used To Change Theme Programmatically
     @AppStorage("isDarkMode") private var isDarkMode = false
 
     var addItem: () -> Void

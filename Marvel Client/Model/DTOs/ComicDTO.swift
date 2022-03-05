@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ComicDTO: Codable, Hashable, Identifiable {
+struct ComicDTO: Codable, Hashable, Identifiable, CoreDataStorable {
     var id: UUID = UUID()
 
     let name: String
