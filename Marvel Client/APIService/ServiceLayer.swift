@@ -17,7 +17,7 @@ extension HTTPClient {
         endpoint: Router,
         responseModel: T.Type
     ) async throws -> Result<T, RequestError> {
-        guard let url = URL(string:  endpoint.url) else {
+        guard let url = URL(string: endpoint.url) else {
             return .failure(.invalidURL)
         }
 

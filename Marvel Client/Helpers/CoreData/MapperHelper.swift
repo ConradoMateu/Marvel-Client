@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 extension Optional where Wrapped == NSSet {
-    func array<T: Hashable>(of: T.Type) -> [T] {
+    func array<T: Hashable>(type: T.Type) -> [T] {
         if let set = self as? Set<T> {
             return Array(set)
         }

@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class MoviesDao : CoreDataDAO<HeroeDTO, Heroe> {
+class MoviesDao: CoreDataDAO<HeroeDTO, Heroe> {
 
     override func encode(entity: HeroeDTO, into object: inout Heroe) {
         object.encode(entity: entity)

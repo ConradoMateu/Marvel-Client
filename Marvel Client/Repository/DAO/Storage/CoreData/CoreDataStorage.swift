@@ -15,15 +15,13 @@ struct CoreDataStorage: Storage {
 
     static let shared = CoreDataStorage()
 
-
     let persistentContainer: NSPersistentContainer
 
-
-    var mainContext : NSManagedObjectContext {
+    var mainContext: NSManagedObjectContext {
         return self.persistentContainer.viewContext
     }
 
-    var taskContext : ManagedContext {
+    var taskContext: ManagedContext {
 
         let context = self.persistentContainer.newBackgroundContext()
         context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump

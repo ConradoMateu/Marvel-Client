@@ -10,7 +10,7 @@ import BackedCodable
 
 /// Using BackedDecodable in order to decode nested JSON with property wrappers
 struct HeroeResponseDTO: BackedDecodable {
-    
+
     /// Default init for Backed Framework
     init(_: DeferredDecoder) {}
 

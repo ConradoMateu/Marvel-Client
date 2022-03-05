@@ -11,7 +11,6 @@ import BackedCodable
 /// Using BackedDecodable in order to decode nested JSON with property wrappers
 struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable {
 
-    
     var id: UUID = UUID()
     var isFavorite: Bool = false
 
@@ -34,6 +33,7 @@ struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable {
     /// Default init for Backed Framework
     init(_: DeferredDecoder) { }
 
+    // swiftlint:disable:next line_length
     init(id: UUID, name: String, description: String, imageURLString: String, comics: [ComicDTO], isFavorite: Bool = false) {
         self.id = id
         self.$name = name

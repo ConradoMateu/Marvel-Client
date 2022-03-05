@@ -7,8 +7,8 @@
 
 import Foundation
 
-//protocol Repository<Entity: Identifiable> {
+// protocol Repository<Entity: Identifiable> {
 //    associatedtype Entity
 //    var apiService: HTTPClient { get set }
 //    var dao: BaseDao<Entity> { get set }
-//}
+// }

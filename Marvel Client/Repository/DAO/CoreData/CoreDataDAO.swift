@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-enum CoreDataError : Error {
+enum CoreDataError: Error {
     case readError(String)
     case writeError(String)
     case deleteError(String)
@@ -19,9 +19,9 @@ protocol CoreDataStorable {
     var id: UUID { get set }
 }
 
-class CoreDataDAO<T : CoreDataStorable, ManagedObject: NSManagedObject> : BaseDAO {
+class CoreDataDAO<Entity: CoreDataStorable, ManagedObject: NSManagedObject>: BaseDAO {
     typealias Storage = CoreDataStorage
-    typealias Entity = T
+
     var storage: Storage
 
     required init(storage: Storage = CoreDataStorage.shared) {
@@ -82,7 +82,9 @@ class CoreDataDAO<T : CoreDataStorable, ManagedObject: NSManagedObject> : BaseDA
         try await backgroundContext.perform {
 
             do {
-                resultCollection = try backgroundContext.fetch(self.generateArrayRequest()).map { self.decode(object: $0) }
+                resultCollection = try backgroundContext.fetch(self.generateArrayRequest()).map {
+                    self.decode(object: $0)
+                }
             } catch {
                 throw CoreDataError.readError("Data Could Not Be Read")
             }
@@ -121,7 +123,9 @@ class CoreDataDAO<T : CoreDataStorable, ManagedObject: NSManagedObject> : BaseDA
 
         try await backgroundContext.perform {
             do {
-                try backgroundContext.fetch(self.generateArrayRequest()).forEach { entity in backgroundContext.delete(entity)}
+                try backgroundContext.fetch(self.generateArrayRequest()).forEach { entity in
+                    backgroundContext.delete(entity)
+                }
                 self.storage.saveContext(backgroundContext)
             } catch {
                 throw CoreDataError.readError("Data Could Not Be Read")
@@ -139,10 +143,16 @@ class CoreDataDAO<T : CoreDataStorable, ManagedObject: NSManagedObject> : BaseDA
     }
 
     func encode(entity: Entity, into object: inout ManagedObject) {
-        fatalError("no encoding provided \(String(describing: Entity.self)) - \(String(describing: ManagedObject.self))")
+        fatalError("""
+                    no encoding provided \(String(describing: Entity.self)) - \(String(describing: ManagedObject.self))
+                    """)
     }
 
     func decode(object: ManagedObject) -> Entity {
-        fatalError("no decoding provided between core data entity: \(String(describing: ManagedObject.self)) and domain entity: \(String(describing: Entity.self))")
+        fatalError("""
+                   no decoding provided between core data entity:
+                   \(String(describing: ManagedObject.self))
+                   and domain entity: \(String(describing: Entity.self))
+                   """)
     }
 }

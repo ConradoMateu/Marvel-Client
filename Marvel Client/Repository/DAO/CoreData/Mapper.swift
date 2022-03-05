@@ -21,7 +21,7 @@ extension Heroe {
         return HeroeDTO(id: self.id!,
                         name: self.name!,
                         description: self.heroeDescription!,
-                        imageURLString: self.imageURLString!, comics: self.comics.array(of: ComicDTO.self),
+                        imageURLString: self.imageURLString!, comics: self.comics.array(type: ComicDTO.self),
                         isFavorite: self.isFavorite)
 
     }
