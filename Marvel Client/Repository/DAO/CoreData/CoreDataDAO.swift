@@ -21,39 +21,54 @@ protocol CoreDataStorable {
 
 class CoreDataDAO<T : CoreDataStorable, ManagedObject: NSManagedObject> : BaseDAO {
     typealias Storage = CoreDataStorage
-    typealias Entity = CoreDataStorable
-    
+    typealias Entity = T
     var storage: Storage
 
     required init(storage: Storage = CoreDataStorage.shared) {
         self.storage = storage
     }
 
+    /// Generates Element Request for finding a specific object in database
+    func generateElementRequest(_ entity: Entity) throws -> NSFetchRequest<ManagedObject> {
+        // swiftlint:disable:next force_cast
+        let request = ManagedObject.fetchRequest() as! NSFetchRequest<ManagedObject>
+        request.predicate = NSPredicate(format: "id = %@", entity.id.uuidString)
+        return request
+    }
+
+    /// Generates Array Request for retrieving all existing objects in database
+    func generateArrayRequest() -> NSFetchRequest<ManagedObject> {
+        // swiftlint:disable:next force_cast
+        let request: NSFetchRequest<ManagedObject> = ManagedObject.fetchRequest() as! NSFetchRequest<ManagedObject>
+
+        if let sortDescriptors = self.sortDescriptors {
+            request.sortDescriptors = sortDescriptors
+        }
+        return request
+    }
+
     // This function adds an Entity if does not exists on the model or on the contrary updates it
-    func update(_ e: Entity) async -> Entity {
+    func update(_ entity: Entity) async -> Entity {
 
         let backgroundContext = storage.taskContext
 
         var updatedEntity: Entity!
         await backgroundContext.perform {
 
-            let request = ManagedObject.fetchRequest() as! NSFetchRequest<ManagedObject>
-            request.predicate = NSPredicate(format: "id = %@", e.id.uuidString)
+            let results = try? backgroundContext.fetch(self.generateElementRequest(entity))
 
-                let results = try? backgroundContext.fetch(request)
-
-            var entity: ManagedObject
+            var coreDataObject: ManagedObject
 
             if results?.count == 0 {
                // Creating Entity
-               entity = ManagedObject(context: backgroundContext)
+                coreDataObject = ManagedObject(context: backgroundContext)
             } else {
                // Updating Entity
-                entity = results!.first!
+                coreDataObject = results!.first!
             }
-            self.encode(entity: e, into: &entity)
+            self.encode(entity: entity, into: &coreDataObject)
             self.storage.saveContext(backgroundContext)
-            updatedEntity = self.decode(object: entity)
+            updatedEntity = self.decode(object: coreDataObject)
         }
 
         return updatedEntity
@@ -66,14 +81,8 @@ class CoreDataDAO<T : CoreDataStorable, ManagedObject: NSManagedObject> : BaseDA
 
         try await backgroundContext.perform {
 
-            let request: NSFetchRequest<ManagedObject> = ManagedObject.fetchRequest() as! NSFetchRequest<ManagedObject>
-
-            if let sortDescriptors = self.sortDescriptors {
-                request.sortDescriptors = sortDescriptors
-            }
-
             do {
-                resultCollection = try backgroundContext.fetch(request).map { self.decode(object: $0) }
+                resultCollection = try backgroundContext.fetch(self.generateArrayRequest()).map { self.decode(object: $0) }
             } catch {
                 throw CoreDataError.readError("Data Could Not Be Read")
             }
@@ -84,16 +93,12 @@ class CoreDataDAO<T : CoreDataStorable, ManagedObject: NSManagedObject> : BaseDA
 
     }
 
-
-    func delete(_ e: Entity) async throws -> Bool {
+    func delete(_ entity: Entity) async throws -> Bool {
 
         let backgroundContext = storage.taskContext
         try await backgroundContext.perform {
 
-            let request = ManagedObject.fetchRequest() as! NSFetchRequest<ManagedObject>
-            request.predicate = NSPredicate(format: "id = %@", e.id.uuidString)
-
-                let result = try backgroundContext.fetch(request)
+                let result = try backgroundContext.fetch(self.generateElementRequest(entity))
 
                 if let object = result.last {
                     guard result.count == 1 else {
@@ -114,18 +119,9 @@ class CoreDataDAO<T : CoreDataStorable, ManagedObject: NSManagedObject> : BaseDA
 
         let backgroundContext = storage.taskContext
 
-
         try await backgroundContext.perform {
-
-            let request: NSFetchRequest<ManagedObject> = ManagedObject.fetchRequest() as! NSFetchRequest<ManagedObject>
-
-            if let sortDescriptors = self.sortDescriptors {
-                request.sortDescriptors = sortDescriptors
-            }
-
             do {
-
-                try backgroundContext.fetch(request).forEach { entity in backgroundContext.delete(entity)}
+                try backgroundContext.fetch(self.generateArrayRequest()).forEach { entity in backgroundContext.delete(entity)}
                 self.storage.saveContext(backgroundContext)
             } catch {
                 throw CoreDataError.readError("Data Could Not Be Read")
@@ -138,12 +134,12 @@ class CoreDataDAO<T : CoreDataStorable, ManagedObject: NSManagedObject> : BaseDA
     }
 
     // MARK: - OVERRIDABLE
-    var sortDescriptors : [NSSortDescriptor]? {
+    var sortDescriptors: [NSSortDescriptor]? {
         return nil
     }
 
     func encode(entity: Entity, into object: inout ManagedObject) {
-        fatalError("no encoding provided between domain entity: \(String(describing: Entity.self)) and core data entity: \(String(describing: ManagedObject.self))")
+        fatalError("no encoding provided \(String(describing: Entity.self)) - \(String(describing: ManagedObject.self))")
     }
 
     func decode(object: ManagedObject) -> Entity {

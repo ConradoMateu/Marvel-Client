@@ -10,7 +10,7 @@ import CoreData
 
 class MoviesDao : CoreDataDAO<HeroeDTO, Heroe> {
 
-    override func encode(entity: HeroeDTO, object: inout Heroe) {
+    override func encode(entity: HeroeDTO, into object: inout Heroe) {
         object.encode(entity: entity)
     }
 

@@ -9,16 +9,20 @@ import Foundation
 
 extension Heroe {
 
-    func encode(entity e: HeroeDTO) {
-        self.id = e.id
-        self.name = e.name
-        self.heroeDescription = e.description
-        self.isFavorite = e.isFavorite
-        self.comics = NSSet(arrayLiteral: e.comics)
+    func encode(entity: HeroeDTO) {
+        self.id = entity.id
+        self.name = entity.name
+        self.heroeDescription = entity.description
+        self.isFavorite = entity.isFavorite
+        self.comics = NSSet(array: entity.comics)
     }
 
     func decode() -> HeroeDTO {
-        return HeroeDTO(id: self.id!, name: self.name!, description: self.heroeDescription!, imageURLString: self.imageURLString!, comics: self.comics.array(of: ComicDTO.self), isFavorite: self.isFavorite)
+        return HeroeDTO(id: self.id!,
+                        name: self.name!,
+                        description: self.heroeDescription!,
+                        imageURLString: self.imageURLString!, comics: self.comics.array(of: ComicDTO.self),
+                        isFavorite: self.isFavorite)
 
     }
 }

@@ -17,9 +17,9 @@ protocol BaseDAO {
     init(storage: Storage)
 
     /// Updates an entity if it exists in the model, otherwise, the entity will be created
-    func update(_ e: Entity) async -> Entity
+    func update(_ entity: Entity) async -> Entity
     func getAll() async throws -> [Entity]
-    func delete(_ e: Entity) async throws -> Bool
+    func delete(_ entity: Entity) async throws -> Bool
     func deleteAll() async throws -> Bool
 
 }
