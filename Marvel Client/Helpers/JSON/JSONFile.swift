@@ -44,3 +44,6 @@ import Foundation
         }
     }
 }
+
+/// Used to reuse JSON in Test Targets
+class JSONReusable { }

@@ -15,6 +15,6 @@ class JSONFileTests: XCTestCase {
 
     func testShouldProperlyDecodeLocalJSON() throws {
         assert(response != nil)
-        assert(response?.data.heroes.count == 10)
+        assert(response?.heroes.count == 10)
     }
 }

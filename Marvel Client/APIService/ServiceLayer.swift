@@ -17,20 +17,21 @@ extension HTTPClient {
         endpoint: Router,
         responseModel: T.Type
     ) async throws -> Result<T, RequestError> {
-        guard let url = URL(string: endpoint.url) else {
-            return .failure(.invalidURL)
+
+        var request = URLComponents(string: endpoint.url)!
+
+        if let parameters = endpoint.parameters {
+            request.queryItems = parameters
         }
 
-        var request = URLRequest(url: url)
-        request.httpMethod = endpoint.method
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        if let body = endpoint.parameters {
-            request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-        }
+        guard let url = request.url else { return .failure(RequestError.invalidURL)  }
+   
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = endpoint.method
 
         do {
-            let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
+            let (data, response) = try await URLSession.shared.data(for: urlRequest, delegate: nil)
             guard let response = response as? HTTPURLResponse else {
                 return .failure(.noResponse)
             }
