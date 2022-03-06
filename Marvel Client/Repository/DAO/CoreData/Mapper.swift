@@ -14,14 +14,14 @@ extension Heroe {
         self.name = entity.name
         self.heroeDescription = entity.description
         self.isFavorite = entity.isFavorite
-        self.comics = NSSet(array: entity.comics)
+//        self.comics = NSSet(array: entity.comics)
     }
 
     func decode() -> HeroeDTO {
         return HeroeDTO(id: self.id!,
                         name: self.name!,
-                        description: self.heroeDescription!,
-                        imageURLString: self.imageURLString!, comics: self.comics.array(type: ComicDTO.self),
+                        description: self.heroeDescription ?? "",
+                        imageURLString: self.imageURLString ?? "", comics: self.comics.array(type: ComicDTO.self),
                         isFavorite: self.isFavorite)
 
     }

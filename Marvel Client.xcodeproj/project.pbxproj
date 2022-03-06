@@ -19,6 +19,7 @@
 		9B424D1127D3F55500B4445C /* MapperHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B424D1027D3F55500B4445C /* MapperHelper.swift */; };
 		9B424D1327D40F8C00B4445C /* HeroeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B424D1227D40F8C00B4445C /* HeroeServiceTests.swift */; };
 		9B424D1527D4119200B4445C /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B424D1427D4119200B4445C /* MockedData.swift */; };
+		9B66139627D5357E0030F853 /* CoreDataDAOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66139527D5357E0030F853 /* CoreDataDAOTests.swift */; };
 		9B662F9A27D44AE100A7A656 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 9B662F9927D44AE100A7A656 /* OHHTTPStubs */; };
 		9B662F9C27D44AE100A7A656 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9B662F9B27D44AE100A7A656 /* OHHTTPStubsSwift */; };
 		9B662FA127D4777900A7A656 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B662FA027D4777900A7A656 /* MD5.swift */; };
@@ -27,7 +28,6 @@
 		9BBC2C9A27D003AE00BEAA26 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2C9927D003AE00BEAA26 /* ContentView.swift */; };
 		9BBC2C9C27D003AF00BEAA26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BBC2C9B27D003AF00BEAA26 /* Assets.xcassets */; };
 		9BBC2C9F27D003AF00BEAA26 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BBC2C9E27D003AF00BEAA26 /* Preview Assets.xcassets */; };
-		9BBC2CA127D003AF00BEAA26 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CA027D003AF00BEAA26 /* Persistence.swift */; };
 		9BBC2CA427D003AF00BEAA26 /* Marvel_Client.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CA227D003AF00BEAA26 /* Marvel_Client.xcdatamodeld */; };
 		9BBC2CAE27D003AF00BEAA26 /* JSONLFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CAD27D003AF00BEAA26 /* JSONLFileTests.swift */; };
 		9BBC2CB827D003AF00BEAA26 /* Marvel_ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CB727D003AF00BEAA26 /* Marvel_ClientUITests.swift */; };
@@ -86,6 +86,7 @@
 		9B424D1027D3F55500B4445C /* MapperHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperHelper.swift; sourceTree = "<group>"; };
 		9B424D1227D40F8C00B4445C /* HeroeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeServiceTests.swift; sourceTree = "<group>"; };
 		9B424D1427D4119200B4445C /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
+		9B66139527D5357E0030F853 /* CoreDataDAOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDAOTests.swift; sourceTree = "<group>"; };
 		9B662FA027D4777900A7A656 /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
 		9B8566D627D10C0500699FB6 /* ComicDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDTO.swift; sourceTree = "<group>"; };
 		9BBC2C9427D003AE00BEAA26 /* Marvel Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,7 +94,6 @@
 		9BBC2C9927D003AE00BEAA26 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9BBC2C9B27D003AF00BEAA26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BBC2C9E27D003AF00BEAA26 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		9BBC2CA027D003AF00BEAA26 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		9BBC2CA327D003AF00BEAA26 /* Marvel_Client.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Marvel_Client.xcdatamodel; sourceTree = "<group>"; };
 		9BBC2CA927D003AF00BEAA26 /* Marvel ClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Marvel ClientTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBC2CAD27D003AF00BEAA26 /* JSONLFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLFileTests.swift; sourceTree = "<group>"; };
@@ -239,7 +239,6 @@
 				9BBC2CD327D0349100BEAA26 /* Model */,
 				9BBC2C9727D003AE00BEAA26 /* Marvel_ClientApp.swift */,
 				9BBC2C9B27D003AF00BEAA26 /* Assets.xcassets */,
-				9BBC2CA027D003AF00BEAA26 /* Persistence.swift */,
 				9BBC2CA227D003AF00BEAA26 /* Marvel_Client.xcdatamodeld */,
 				9BBC2C9D27D003AF00BEAA26 /* Preview Content */,
 			);
@@ -260,6 +259,7 @@
 				9BBC2CAD27D003AF00BEAA26 /* JSONLFileTests.swift */,
 				9B424D1227D40F8C00B4445C /* HeroeServiceTests.swift */,
 				9B424D1427D4119200B4445C /* MockedData.swift */,
+				9B66139527D5357E0030F853 /* CoreDataDAOTests.swift */,
 			);
 			path = "Marvel ClientTests";
 			sourceTree = "<group>";
@@ -518,7 +518,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBC2CEE27D0619200BEAA26 /* Toolbar.swift in Sources */,
-				9BBC2CA127D003AF00BEAA26 /* Persistence.swift in Sources */,
 				9BBC2D0127D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */,
 				9B424D0827D3C25100B4445C /* CoreDataStorage.swift in Sources */,
 				9B424D0427D3293C00B4445C /* CoreDataDAO.swift in Sources */,
@@ -554,6 +553,7 @@
 				9B424D1527D4119200B4445C /* MockedData.swift in Sources */,
 				9BBC2CAE27D003AF00BEAA26 /* JSONLFileTests.swift in Sources */,
 				9B424D1327D40F8C00B4445C /* HeroeServiceTests.swift in Sources */,
+				9B66139627D5357E0030F853 /* CoreDataDAOTests.swift in Sources */,
 				9BBC2D0227D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */,
 				9BBC2CE627D057C300BEAA26 /* JSONFile.swift in Sources */,
 				9BBC2CEF27D0619200BEAA26 /* Toolbar.swift in Sources */,
