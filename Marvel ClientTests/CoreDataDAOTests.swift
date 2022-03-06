@@ -14,17 +14,41 @@ class CoreDataDAOTests: XCTestCase {
     @JSONFile(named: "response")
     var response: HeroeResponseDTO?
     override func setUpWithError() throws {
-        self.storage = CoreDataStorage(isInMemoryStore: true)
+        self.storage = CoreDataStorage()
     }
 
     func testShouldCreateEntityInDB() async throws {
-        let randomHeroe = response?.heroes.randomElement()!
+        _ = response?.heroes.randomElement()!
         let heroesDAO = HeroesDao(storage: storage)
 
-        await heroesDAO.update(randomHeroe!)
+        for heroe in response!.heroes {
+            _ = await heroesDAO.addReplacing(heroe)
+        }
 
-        let insertedHeroe = try await heroesDAO.getAll()
+            let insertedHeroe = try await heroesDAO.getAll()
 
-        print("Inserted HERO: \(insertedHeroe)")
+    //        assert(randomHeroe?.name == insertedHeroe.first?.name)
+            print("Inserted HERO: \(insertedHeroe)")
+
+//        await heroesDAO.addReplacing(randomHeroe!)
+
+    }
+
+    func testShouldCreateComicInDB() async throws {
+        let randomComic = response?.heroes.randomElement()?.comics.randomElement()
+        let comicsDAO = ComicsDao(storage: storage)
+
+        await comicsDAO.addReplacing(randomComic!)
+
+        var insertedComic = try await comicsDAO.getAll()
+
+        print("Inserted HERO: \(insertedComic)")
+        var newReplacementComic = ComicDTO(id: randomComic!.id, name: "Emgyyy")
+
+        await comicsDAO.addReplacing(newReplacementComic)
+
+        var aaaaa = try await comicsDAO.getAll()
+
+        print("Inserted HERO: \(aaaaa)")
     }
 }

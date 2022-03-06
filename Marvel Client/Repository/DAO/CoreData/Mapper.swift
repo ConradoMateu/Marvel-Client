@@ -15,6 +15,7 @@ extension Heroe {
         self.heroeDescription = entity.description
         self.isFavorite = entity.isFavorite
 //        self.comics = NSSet(array: entity.comics)
+
     }
 
     func decode() -> HeroeDTO {
@@ -23,6 +24,18 @@ extension Heroe {
                         description: self.heroeDescription ?? "",
                         imageURLString: self.imageURLString ?? "", comics: self.comics.array(type: ComicDTO.self),
                         isFavorite: self.isFavorite)
+
+    }
+}
+
+extension Comic {
+    func encode(entity: ComicDTO) {
+        self.id = entity.id
+        self.name = entity.name
+    }
+
+    func decode() -> ComicDTO {
+        return ComicDTO(id: self.id!, name: self.name ?? "")
 
     }
 }

@@ -48,7 +48,7 @@ class CoreDataDAO<Entity: CoreDataStorable, ManagedObject: NSManagedObject>: Bas
     }
 
     // This function adds an Entity if does not exists on the model or on the contrary updates it
-    func update(_ entity: Entity) async -> Entity {
+    func addReplacing(_ entity: Entity) async -> Entity {
 
         let backgroundContext = storage.taskContext
 

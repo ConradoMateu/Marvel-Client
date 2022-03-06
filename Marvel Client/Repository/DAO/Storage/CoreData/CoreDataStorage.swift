@@ -35,7 +35,7 @@ struct CoreDataStorage: Storage {
         if isInMemoryStore {
             persistentContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-
+        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
         persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
 
             // TODO: Delete This, just for debug purposes
@@ -53,7 +53,6 @@ struct CoreDataStorage: Storage {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
     }
 
     func saveContext() {
