@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import BackedCodable
 
 enum CoreDataError: Error {
     case readError(String)
@@ -16,7 +17,7 @@ enum CoreDataError: Error {
 }
 
 protocol CoreDataStorable {
-    var id: UUID { get }
+    var id: String { get set }
 }
 
 class CoreDataDAO<Entity: CoreDataStorable, ManagedObject: NSManagedObject>: BaseDAO {
@@ -32,7 +33,7 @@ class CoreDataDAO<Entity: CoreDataStorable, ManagedObject: NSManagedObject>: Bas
     func generateElementRequest(_ entity: Entity) throws -> NSFetchRequest<ManagedObject> {
         // swiftlint:disable:next force_cast
         let request = ManagedObject.fetchRequest() as! NSFetchRequest<ManagedObject>
-        request.predicate = NSPredicate(format: "id = %@", entity.id.uuidString)
+        request.predicate = NSPredicate(format: "id = %@", entity.id)
         return request
     }
 

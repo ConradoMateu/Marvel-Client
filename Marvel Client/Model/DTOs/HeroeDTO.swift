@@ -11,7 +11,7 @@ import BackedCodable
 /// Using BackedDecodable in order to decode nested JSON with property wrappers
 struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable, Comparable {
 
-    var id: UUID = UUID()
+    var id: String = UUID().uuidString
     var isFavorite: Bool = false
 
     @Backed()
@@ -31,11 +31,16 @@ struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable, Comp
     var comics: [ComicDTO]
 
     /// Default init for Backed Framework
-    init(_: DeferredDecoder) { }
+    init(_: DeferredDecoder) {  }
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+    }
 
     // swiftlint:disable:next line_length
-    init(id: UUID, name: String, description: String, imageURLString: String, comics: [ComicDTO], isFavorite: Bool = false) {
+    init(id: String, name: String, description: String, imageURLString: String, comics: [ComicDTO], isFavorite: Bool = false) {
 //        self.id = id
+        self.id = id
         self.$name = name
         self.$description = description
         let urlExtension = imageURLString.fileExtension()
@@ -49,10 +54,11 @@ struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable, Comp
 
     static func == (lhs: HeroeDTO, rhs: HeroeDTO) -> Bool {
         lhs.id == rhs.id &&
-        lhs.$name == rhs.$name &&
+        lhs.name == rhs.name &&
         lhs.imageURL == rhs.imageURL &&
         lhs.isFavorite == rhs.isFavorite &&
-        lhs.$description == rhs.$description
+        lhs.description == rhs.description &&
+        lhs.comics.count == rhs.comics.count
     }
 
     static func < (lhs: HeroeDTO, rhs: HeroeDTO) -> Bool {

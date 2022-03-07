@@ -16,15 +16,19 @@ extension Heroe {
         self.isFavorite = entity.isFavorite
         self.imageURLString = "\(entity.imagePath).\(entity.imageExtension)"
 
-        var comicObjects = Set<Comic>()
-        for comic in entity.comics {
-            let newComic: Comic = Comic(context: self.managedObjectContext!)
-            newComic.encode(entity: comic)
-            comicObjects.insert(newComic)
+        // Adding only if creating struct
+        if self.comics?.count == 0 {
+            var comicObjects = Set<Comic>()
+            for comic in entity.comics {
+                let newComic: Comic = Comic(context: self.managedObjectContext!)
+                newComic.encode(entity: comic)
+                comicObjects.insert(newComic)
+            }
+
+            // Ads Reference between Hero <--> Comics
+            self.addToComics(comicObjects)
         }
 
-        // Ads Reference between Hero <--> Comics
-        self.addToComics(comicObjects)
     }
 
     func decode() -> HeroeDTO {

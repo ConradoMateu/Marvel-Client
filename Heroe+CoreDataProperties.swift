@@ -16,7 +16,7 @@ extension Heroe {
     }
 
     @NSManaged public var heroeDescription: String?
-    @NSManaged public var id: UUID?
+    @NSManaged public var id: String?
     @NSManaged public var imageURLString: String?
     @NSManaged public var isFavorite: Bool
     @NSManaged public var name: String?

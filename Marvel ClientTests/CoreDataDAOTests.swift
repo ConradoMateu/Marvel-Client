@@ -23,49 +23,84 @@ class CoreDataDAOTests: XCTestCase {
         return safeHeroes.filter { $0.comics.count != 0 }
     }
 
+    var hero: HeroeDTO!
+
     override func setUpWithError() throws {
 
+        hero = heroesWithComics.randomElement()
         // Set in memory for testing purposes to do not persist in SQL DB
         self.storage = CoreDataStorage(isInMemoryStore: true)
     }
 
-    func testShouldCreateEntityInDB() async throws {
+    func testShouldCreateHeroeInDB() async throws {
         let heroesDAO = HeroesDao(storage: storage)
 
-//        for hero in  {
-            _ = try await heroesDAO.addReplacing(heroesWithComics[0])
-//        }
-
-        print("API: \(heroesWithComics[0].hashValue)")
-        print("API: \(heroesWithComics[0].hashValue)")
-        print("API: \(heroesWithComics[0].id)")
+        _ = await heroesDAO.addReplacing(hero)
 
         let dbHeroes = try await heroesDAO.getAll()
 
-        for (index, element) in dbHeroes.enumerated() {
-            print("DBHEROES: \(element.id)")
-            print("APIHEROES: \(heroesWithComics[0].id)")
-            print("DBHEROES: \(element.name)")
-            print("APIHEROES: \(heroesWithComics[0].name)")
-          assert(dbHeroes[index] == heroesWithComics[index])
-        }
+        assert(dbHeroes.first == hero)
     }
 
-    func testShouldCreateComicInDB() async throws {
-        let randomComic = response?.heroes.randomElement()?.comics.randomElement()
+    func testShouldReplaceHeroeInDB() async throws {
+        let heroesDAO = HeroesDao(storage: storage)
+
+        _ = await heroesDAO.addReplacing(hero)
+
+        let newHero = HeroeDTO(id: hero.id,
+                               name: "Another Name To Test",
+                               description: "Another Description",
+                               imageURLString: "http://i.annihil.us.jpg",
+                               comics: hero.comics,
+                               isFavorite: hero.isFavorite)
+
+        _ = await heroesDAO.addReplacing(newHero)
+        let dbHeroes = try await heroesDAO.getAll()
+
+        assert(dbHeroes.first == newHero)
+    }
+
+    func testShouldDeleteSingleHero() async throws {
+        let heroesDAO = HeroesDao(storage: storage)
+        let someHeroes = heroesWithComics[0...2]
+
+        for hero in someHeroes {
+            _ = await heroesDAO.addReplacing(hero)
+        }
+
+        _  = try await heroesDAO.delete(someHeroes.first!)
+
+        let dbHeroes = try await heroesDAO.getAll()
+
+        assert(someHeroes.count - 1 == dbHeroes.count)
+        assert(!dbHeroes.contains(someHeroes.first!))
+    }
+
+    func testShouldAddComicInDB() async throws {
+        let randomComic: ComicDTO! = hero.comics.randomElement()
         let comicsDAO = ComicsDao(storage: storage)
 
-        await comicsDAO.addReplacing(randomComic!)
+        _ = await comicsDAO.addReplacing(randomComic)
+        let result = try await comicsDAO.getAll()
 
-        var insertedComic = try await comicsDAO.getAll()
+        assert(result.first == randomComic)
+    }
+
+    func testShouldRepalceComicInDB() async throws {
+        let randomComic: ComicDTO! = hero.comics.randomElement()
+        let comicsDAO = ComicsDao(storage: storage)
+
+        _ = await comicsDAO.addReplacing(randomComic)
+
+        let insertedComic = try await comicsDAO.getAll()
 
         print("Inserted HERO: \(insertedComic)")
-        var newReplacementComic = ComicDTO(id: randomComic!.id, name: "Emgyyy")
+        let newReplacementComic = ComicDTO(id: randomComic!.id, name: "Another name for testing")
 
-        await comicsDAO.addReplacing(newReplacementComic)
+        _ = await comicsDAO.addReplacing(newReplacementComic)
 
-        var aaaaa = try await comicsDAO.getAll()
+        let result = try await comicsDAO.getAll()
 
-        print("Inserted HERO: \(aaaaa)")
+        assert(result.first == newReplacementComic)
     }
 }

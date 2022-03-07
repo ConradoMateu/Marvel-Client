@@ -8,7 +8,7 @@
 import Foundation
 
 struct ComicDTO: Codable, Hashable, Identifiable, CoreDataStorable {
-    var id: UUID = UUID()
+    var id: String = UUID().uuidString
 
     let name: String
     private enum CodingKeys: String, CodingKey {

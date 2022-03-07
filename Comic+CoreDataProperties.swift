@@ -15,7 +15,7 @@ extension Comic {
         return NSFetchRequest<Comic>(entityName: "Comic")
     }
 
-    @NSManaged public var id: UUID?
+    @NSManaged public var id: String?
     @NSManaged public var name: String?
     @NSManaged public var ofHeroe: Heroe?
 
