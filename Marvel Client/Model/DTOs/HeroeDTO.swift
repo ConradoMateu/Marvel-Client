@@ -9,7 +9,7 @@ import Foundation
 import BackedCodable
 
 /// Using BackedDecodable in order to decode nested JSON with property wrappers
-struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable {
+struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable, Comparable {
 
     var id: UUID = UUID()
     var isFavorite: Bool = false
@@ -35,17 +35,28 @@ struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable {
 
     // swiftlint:disable:next line_length
     init(id: UUID, name: String, description: String, imageURLString: String, comics: [ComicDTO], isFavorite: Bool = false) {
-        self.id = id
+//        self.id = id
         self.$name = name
         self.$description = description
-        self.$imagePath = imageURLString.path()
-        self.$imageExtension = imageURLString.fileExtension()
+        let urlExtension = imageURLString.fileExtension()
+
+        self.$imageExtension = urlExtension
+
+        self.$imagePath = imageURLString.replacingOccurrences(of: ".\(urlExtension)", with: "")
         self.$comics = comics
         self.isFavorite = isFavorite
     }
 
     static func == (lhs: HeroeDTO, rhs: HeroeDTO) -> Bool {
-        lhs.id == rhs.id && lhs.name == rhs.name && lhs.imageURL == rhs.imageURL
+        lhs.id == rhs.id &&
+        lhs.$name == rhs.$name &&
+        lhs.imageURL == rhs.imageURL &&
+        lhs.isFavorite == rhs.isFavorite &&
+        lhs.$description == rhs.$description
+    }
+
+    static func < (lhs: HeroeDTO, rhs: HeroeDTO) -> Bool {
+        lhs.name < rhs.name
     }
 
 }

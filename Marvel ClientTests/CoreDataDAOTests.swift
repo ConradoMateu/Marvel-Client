@@ -13,25 +13,42 @@ class CoreDataDAOTests: XCTestCase {
 
     @JSONFile(named: "response")
     var response: HeroeResponseDTO?
+
+    var heroesWithComics: [HeroeDTO] {
+
+        guard let safeHeroes = response?.heroes else {
+            fatalError("JSONData Could not be decoded")
+        }
+
+        return safeHeroes.filter { $0.comics.count != 0 }
+    }
+
     override func setUpWithError() throws {
-        self.storage = CoreDataStorage()
+
+        // Set in memory for testing purposes to do not persist in SQL DB
+        self.storage = CoreDataStorage(isInMemoryStore: true)
     }
 
     func testShouldCreateEntityInDB() async throws {
-        _ = response?.heroes.randomElement()!
         let heroesDAO = HeroesDao(storage: storage)
 
-        for heroe in response!.heroes {
-            _ = await heroesDAO.addReplacing(heroe)
+//        for hero in  {
+            _ = try await heroesDAO.addReplacing(heroesWithComics[0])
+//        }
+
+        print("API: \(heroesWithComics[0].hashValue)")
+        print("API: \(heroesWithComics[0].hashValue)")
+        print("API: \(heroesWithComics[0].id)")
+
+        let dbHeroes = try await heroesDAO.getAll()
+
+        for (index, element) in dbHeroes.enumerated() {
+            print("DBHEROES: \(element.id)")
+            print("APIHEROES: \(heroesWithComics[0].id)")
+            print("DBHEROES: \(element.name)")
+            print("APIHEROES: \(heroesWithComics[0].name)")
+          assert(dbHeroes[index] == heroesWithComics[index])
         }
-
-            let insertedHeroe = try await heroesDAO.getAll()
-
-    //        assert(randomHeroe?.name == insertedHeroe.first?.name)
-            print("Inserted HERO: \(insertedHeroe)")
-
-//        await heroesDAO.addReplacing(randomHeroe!)
-
     }
 
     func testShouldCreateComicInDB() async throws {

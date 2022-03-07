@@ -14,15 +14,25 @@ extension Heroe {
         self.name = entity.name
         self.heroeDescription = entity.description
         self.isFavorite = entity.isFavorite
-//        self.comics = NSSet(array: entity.comics)
+        self.imageURLString = "\(entity.imagePath).\(entity.imageExtension)"
 
+        var comicObjects = Set<Comic>()
+        for comic in entity.comics {
+            let newComic: Comic = Comic(context: self.managedObjectContext!)
+            newComic.encode(entity: comic)
+            comicObjects.insert(newComic)
+        }
+
+        // Ads Reference between Hero <--> Comics
+        self.addToComics(comicObjects)
     }
 
     func decode() -> HeroeDTO {
         return HeroeDTO(id: self.id!,
                         name: self.name!,
                         description: self.heroeDescription ?? "",
-                        imageURLString: self.imageURLString ?? "", comics: self.comics.array(type: ComicDTO.self),
+                        imageURLString: self.imageURLString ?? "",
+                        comics: Array(self.comics ?? [] ).map { $0.decode() },
                         isFavorite: self.isFavorite)
 
     }

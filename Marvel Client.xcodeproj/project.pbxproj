@@ -21,6 +21,10 @@
 		9B424D1527D4119200B4445C /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B424D1427D4119200B4445C /* MockedData.swift */; };
 		9B66139627D5357E0030F853 /* CoreDataDAOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66139527D5357E0030F853 /* CoreDataDAOTests.swift */; };
 		9B66139827D5388D0030F853 /* ComicsDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66139727D5388D0030F853 /* ComicsDAO.swift */; };
+		9B66139D27D578E60030F853 /* Comic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66139927D578E60030F853 /* Comic+CoreDataClass.swift */; };
+		9B66139E27D578E60030F853 /* Comic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66139A27D578E60030F853 /* Comic+CoreDataProperties.swift */; };
+		9B66139F27D578E60030F853 /* Heroe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66139B27D578E60030F853 /* Heroe+CoreDataClass.swift */; };
+		9B6613A027D578E60030F853 /* Heroe+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66139C27D578E60030F853 /* Heroe+CoreDataProperties.swift */; };
 		9B662F9A27D44AE100A7A656 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 9B662F9927D44AE100A7A656 /* OHHTTPStubs */; };
 		9B662F9C27D44AE100A7A656 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9B662F9B27D44AE100A7A656 /* OHHTTPStubsSwift */; };
 		9B662FA127D4777900A7A656 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B662FA027D4777900A7A656 /* MD5.swift */; };
@@ -89,6 +93,10 @@
 		9B424D1427D4119200B4445C /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
 		9B66139527D5357E0030F853 /* CoreDataDAOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDAOTests.swift; sourceTree = "<group>"; };
 		9B66139727D5388D0030F853 /* ComicsDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsDAO.swift; sourceTree = "<group>"; };
+		9B66139927D578E60030F853 /* Comic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9B66139A27D578E60030F853 /* Comic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comic+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9B66139B27D578E60030F853 /* Heroe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Heroe+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9B66139C27D578E60030F853 /* Heroe+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Heroe+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9B662FA027D4777900A7A656 /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
 		9B8566D627D10C0500699FB6 /* ComicDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDTO.swift; sourceTree = "<group>"; };
 		9BBC2C9427D003AE00BEAA26 /* Marvel Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +221,10 @@
 		9BBC2C8B27D003AE00BEAA26 = {
 			isa = PBXGroup;
 			children = (
+				9B66139927D578E60030F853 /* Comic+CoreDataClass.swift */,
+				9B66139A27D578E60030F853 /* Comic+CoreDataProperties.swift */,
+				9B66139B27D578E60030F853 /* Heroe+CoreDataClass.swift */,
+				9B66139C27D578E60030F853 /* Heroe+CoreDataProperties.swift */,
 				9BBC2C9627D003AE00BEAA26 /* Marvel Client */,
 				9BBC2CAC27D003AF00BEAA26 /* Marvel ClientTests */,
 				9BBC2CB627D003AF00BEAA26 /* Marvel ClientUITests */,
@@ -521,13 +533,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBC2CEE27D0619200BEAA26 /* Toolbar.swift in Sources */,
+				9B66139F27D578E60030F853 /* Heroe+CoreDataClass.swift in Sources */,
 				9BBC2D0127D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */,
 				9B424D0827D3C25100B4445C /* CoreDataStorage.swift in Sources */,
 				9B424D0427D3293C00B4445C /* CoreDataDAO.swift in Sources */,
 				9BBC2C9A27D003AE00BEAA26 /* ContentView.swift in Sources */,
 				9B424D0E27D3F11D00B4445C /* Mapper.swift in Sources */,
 				9B424CE427D2D3D500B4445C /* HeroeService.swift in Sources */,
+				9B6613A027D578E60030F853 /* Heroe+CoreDataProperties.swift in Sources */,
 				9B66139827D5388D0030F853 /* ComicsDAO.swift in Sources */,
+				9B66139E27D578E60030F853 /* Comic+CoreDataProperties.swift in Sources */,
 				9BBC2CFD27D07E1500BEAA26 /* DetailRow.swift in Sources */,
 				9B424D0027D320BE00B4445C /* Repository.swift in Sources */,
 				9BFCDDBD27D2435900EB5D80 /* Router.swift in Sources */,
@@ -535,6 +550,7 @@
 				9BBC2C9827D003AE00BEAA26 /* Marvel_ClientApp.swift in Sources */,
 				9BBC2CF327D06E2F00BEAA26 /* HeroeRow.swift in Sources */,
 				9B662FA127D4777900A7A656 /* MD5.swift in Sources */,
+				9B66139D27D578E60030F853 /* Comic+CoreDataClass.swift in Sources */,
 				9BBC2CE527D057C300BEAA26 /* JSONFile.swift in Sources */,
 				9BBC2CA427D003AF00BEAA26 /* Marvel_Client.xcdatamodeld in Sources */,
 				9B8566D727D10C0500699FB6 /* ComicDTO.swift in Sources */,

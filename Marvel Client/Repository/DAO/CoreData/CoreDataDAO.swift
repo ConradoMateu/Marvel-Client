@@ -16,7 +16,7 @@ enum CoreDataError: Error {
 }
 
 protocol CoreDataStorable {
-    var id: UUID { get set }
+    var id: UUID { get }
 }
 
 class CoreDataDAO<Entity: CoreDataStorable, ManagedObject: NSManagedObject>: BaseDAO {
