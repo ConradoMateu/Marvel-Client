@@ -55,7 +55,7 @@ class HeroeServiceTests: XCTestCase {
 
         do {
             // WHEN
-            let res = try await heroeService.getHeroes()
+            _ = try await heroeService.getHeroes()
 
         } catch  RequestError.decode {
 

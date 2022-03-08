@@ -118,9 +118,16 @@ class HeroesViewModel: BaseViewModel {
                 self.triggerInternetAlert = true
                 self.isLoading = false
             } catch {
+
                 self.isLoading = false
-                self.error = error
-                self.triggerErrorAlert = true
+
+                // When a Task is cancelled
+                guard (error as NSError?)?.code == NSURLErrorCancelled  else {
+                   // Do Your stuff
+                    self.error = error
+                    self.triggerErrorAlert = true
+                    return
+                }
             }
         }
     }
