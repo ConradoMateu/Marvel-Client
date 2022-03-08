@@ -198,6 +198,7 @@
 		9B424CFB27D2F1A400B4445C /* Mapping */ = {
 			isa = PBXGroup;
 			children = (
+				9B424D0D27D3F11D00B4445C /* Mapper.swift */,
 			);
 			path = Mapping;
 			sourceTree = "<group>";
@@ -227,7 +228,6 @@
 			children = (
 				9B424D0A27D3F09E00B4445C /* HeroesDAO.swift */,
 				9B424D0327D3293C00B4445C /* CoreDataDAO.swift */,
-				9B424D0D27D3F11D00B4445C /* Mapper.swift */,
 				9B66139727D5388D0030F853 /* ComicsDAO.swift */,
 			);
 			path = CoreData;
