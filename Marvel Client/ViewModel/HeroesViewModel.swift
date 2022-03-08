@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import SwiftUI
 
+// Marked as main actor because is attach to the view, an actor execute actions in the main thread
 @MainActor
 class HeroesViewModel: ObservableObject {
 
@@ -17,6 +18,11 @@ class HeroesViewModel: ObservableObject {
 
     // RequestError from service or CoreDataError from dao
     @Published var error: Error?
+
+    @Published var isLoading: Bool = false
+
+    @Published var triggerInternetAlert: Bool = false
+    @Published var triggerErrorAlert: Bool = false
 
     var repository: HeroesRepository
 
@@ -30,8 +36,6 @@ class HeroesViewModel: ObservableObject {
 
     // Prevent requesting heroes when coming back from detailed view
     var comingFromDetailView: Bool = false
-
-    private var cancellableBag = Set<AnyCancellable>()
 
     required init(repository: HeroesRepository = DependencyInjector.getHeroesRepository()) {
         self.repository = repository
@@ -49,25 +53,34 @@ class HeroesViewModel: ObservableObject {
                 self.comingFromDetailView.toggle()
                 return
             }
-
+            withAnimation {
+                isLoading.toggle()
+            }
             page += 1
-            let newResult = try await repository.getHeroes(limit: limit, page: page, offset: nextOffset).sortedByFavorite()
+            let newResult = try await repository.getHeroes(limit: limit,
+                                                           page: page,
+                                                           offset: nextOffset).sortedByFavorite()
+            isLoading.toggle()
             withAnimation {
                 result = newResult
             }
-
+        } catch RequestError.offline {
+            self.triggerInternetAlert = true
+            self.isLoading = false
         } catch {
+            self.isLoading = false
             self.error = error
+            self.triggerErrorAlert = true
         }
     }
 
     func addRandomHero() async {
         let randomUser = HeroeDTO.random
+
         withAnimation {
             self.result.append(randomUser)
             self.result = result.sortedByFavorite()
         }
-
         Task {
             await self.repository.add(hero: randomUser)
         }
@@ -91,6 +104,7 @@ class HeroesViewModel: ObservableObject {
 
     func togglePagination() async {
         if result.count > limit - 1 {
+            cleanErrors()
             do {
                 page += 1
 
@@ -99,14 +113,21 @@ class HeroesViewModel: ObservableObject {
                 withAnimation {
                     result = newResult.sortedByFavorite()
                 }
+            } catch RequestError.offline {
+                self.triggerInternetAlert = true
+                self.isLoading = false
             } catch {
+                self.isLoading = false
                 self.error = error
+                self.triggerErrorAlert = true
             }
         }
     }
 
     func cleanErrors() {
         self.error = nil
+        self.triggerInternetAlert = false
+        self.triggerErrorAlert = false
     }
 
     func deleteAllHeroes() async {

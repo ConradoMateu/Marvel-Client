@@ -17,6 +17,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+
                 if viewmodel.result.count != 0 {
                     List {
                         ForEach(viewmodel.result, id: \.id) { hero in
@@ -46,18 +47,31 @@ struct ContentView: View {
                         }
                     }, label: {
                         Text("Get Heroes")
-                    })
+                    }).buttonStyle(.borderedProminent)
+                        .controlSize(.large)
                 }
 
-            }.onAppear {
+            }
+                .onAppear {
                 Task {
                     await viewmodel.getHeroes()
                 }
             }.onDisappear {
                 viewmodel.goingToDetailView()
-            }.makeToolbarItems(addItem: viewmodel.addRandomHero, deleteItem: viewmodel.deleteAllHeroes)
+            }
+                .makeToolbarItems(addItem: viewmodel.addRandomHero, deleteItem: viewmodel.deleteAllHeroes)
+                .alert(isPresented: $viewmodel.triggerInternetAlert, content: {
+                    return Alert(title: Text("No Internet Connection"),
+                                 message: Text("Please enable Wifi or Cellular data"),
+                                 dismissButton: .default(Text("OK")))
+                })
+                .alert(isPresented: $viewmodel.triggerErrorAlert, content: {
+                    return Alert(title: Text("An Error Has Occurred"),
+                                 message: Text(viewmodel.error?.localizedDescription ?? ""),
+                                 dismissButton: .default(Text("OK")))
+                })
                 .navigationTitle("Heroes")
-        } .navigationViewStyle(.stack)
+        } .navigationViewStyle(.stack).loaderViewWrapper(isLoading: viewmodel.isLoading)
     }
 
     // Required Function for deleting an element from a swipe

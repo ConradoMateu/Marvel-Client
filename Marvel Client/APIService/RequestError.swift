@@ -12,6 +12,7 @@ enum RequestError: Error {
     case invalidURL
     case noResponse
     case unauthorised
+    case offline
     case unknown
 
     var customMessage: String {

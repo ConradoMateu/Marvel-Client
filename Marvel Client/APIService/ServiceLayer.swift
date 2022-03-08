@@ -46,6 +46,12 @@ extension HTTPClient {
             default:
                 throw RequestError.unknown
             }
+        } catch URLError.Code.notConnectedToInternet {
+            throw RequestError.offline
         }
     }
 }
+
+
+
+

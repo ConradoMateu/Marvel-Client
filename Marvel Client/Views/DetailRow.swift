@@ -33,31 +33,31 @@ struct DetailRow: View {
                 List(heroe.comics) { comic in
                     Text(comic.name)
                 }
-                .toolbar {
-                    ToolbarItem {
-                        Button(action: {
-                            heroe.isFavorite.toggle()
-                            Task {
-                                await triggerFavoriteButton()
-                            }
 
-                        }, label: {
-
-                            Label("Add Favorite Heroe", systemImage: heroe.isFavorite ? "star.fill" : "star")
-                        })
+            }
+        }.toolbar {
+            ToolbarItem {
+                Button(action: {
+                    heroe.isFavorite.toggle()
+                    Task {
+                        await triggerFavoriteButton()
                     }
-                }
+
+                }, label: {
+
+                    Label("Add Favorite Heroe", systemImage: heroe.isFavorite ? "star.fill" : "star")
+                })
             }
         }
 
-         .navigationTitle(heroe.name)
+        .navigationTitle(heroe.name)
 
-         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     func triggerFavoriteButton() async {
 
-            await onFavoriteToggled(heroe)
+        await onFavoriteToggled(heroe)
 
     }
 }
