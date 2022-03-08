@@ -36,7 +36,7 @@ class HeroesRepository: Repository {
 
         // When `cachedMovies.count / page` < 1 , the cached data is not enough so an API call needs to be done
         // Page 0 is false to prevent division by cero, in this case there is no need to call to the API
-        print("cached movies \(cachedMovies.count), neeedsApicAll? : \((cachedMovies.count / limit) < page) ")
+        print("cached movies \(cachedMovies.count), needsAPICall? : \((cachedMovies.count / limit) < page) ")
         let needsAPICall: Bool = page == 0 ? false : (cachedMovies.count / limit) < page
 
         guard needsAPICall else {

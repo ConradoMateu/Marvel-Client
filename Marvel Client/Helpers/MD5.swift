@@ -9,7 +9,7 @@ import Foundation
 import CryptoKit
 
 extension String {
-    // to generate Hash Were going to use cryptoKit...
+    // To generate MD5 for Marvel API
     var md5: String {
         let hash = Insecure.MD5.hash(data: self.data(using: .utf8) ?? Data())
 

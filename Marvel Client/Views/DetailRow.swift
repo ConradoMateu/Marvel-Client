@@ -49,16 +49,12 @@ struct DetailRow: View {
                 })
             }
         }
-
         .navigationTitle(heroe.name)
-
         .navigationBarTitleDisplayMode(.inline)
     }
 
     func triggerFavoriteButton() async {
-
         await onFavoriteToggled(heroe)
-
     }
 }
 
