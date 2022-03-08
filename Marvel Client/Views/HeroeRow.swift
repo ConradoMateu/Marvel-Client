@@ -9,11 +9,11 @@ import SwiftUI
 import CachedAsyncImage
 
 struct HeroeRow: View {
-    var heroe: HeroeDTO
+    var hero: HeroDTO
     var body: some View {
 
         HStack {
-            CachedAsyncImage(url: heroe.imageURL, content: { image in
+            CachedAsyncImage(url: hero.imageURL, content: { image in
                 image.brandedThumbnail()
             }, placeholder: {
                 Image("placeholder").brandedThumbnail()
@@ -21,11 +21,11 @@ struct HeroeRow: View {
 
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text(heroe.name)
+                    Text(hero.name)
                         .lineLimit(1)
 
                     Spacer()
-                    if heroe.isFavorite {
+                    if hero.isFavorite {
                         Image(systemName: "star.fill")
                             .renderingMode(.template)
                             .foregroundColor(.yellow)
@@ -33,8 +33,8 @@ struct HeroeRow: View {
 
                 }
 
-                if heroe.description != "" {
-                    Text(heroe.description)
+                if hero.description != "" {
+                    Text(hero.description)
                         .foregroundColor(.gray)
                         .lineLimit(3)
                         .font(.footnote)

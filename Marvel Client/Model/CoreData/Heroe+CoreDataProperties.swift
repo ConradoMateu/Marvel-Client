@@ -9,13 +9,13 @@
 import Foundation
 import CoreData
 
-extension Heroe {
+extension Hero {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Heroe> {
-        return NSFetchRequest<Heroe>(entityName: "Heroe")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Hero> {
+        return NSFetchRequest<Hero>(entityName: "Hero")
     }
 
-    @NSManaged public var heroeDescription: String?
+    @NSManaged public var heroDescription: String?
     @NSManaged public var id: String?
     @NSManaged public var imageURLString: String?
     @NSManaged public var isFavorite: Bool
@@ -25,7 +25,7 @@ extension Heroe {
 }
 
 // MARK: Generated accessors for comics
-extension Heroe {
+extension Hero {
 
     @objc(addComicsObject:)
     @NSManaged public func addToComics(_ value: Comic)
@@ -41,6 +41,6 @@ extension Heroe {
 
 }
 
-extension Heroe: Identifiable {
+extension Hero: Identifiable {
 
 }

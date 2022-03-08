@@ -24,7 +24,7 @@ class ComicsDAOTests: XCTestCase {
     @JSONFile(named: "response")
     var response: HeroeResponseDTO?
 
-    var heroesWithComics: [HeroeDTO] {
+    var heroesWithComics: [HeroDTO] {
 
         guard let safeHeroes = response?.heroes else {
             fatalError("JSONData Could not be decoded")
@@ -33,7 +33,7 @@ class ComicsDAOTests: XCTestCase {
         return safeHeroes.filter { $0.comics.count != 0 }
     }
 
-    var hero: HeroeDTO!
+    var hero: HeroDTO!
 
     override func setUpWithError() throws {
 

@@ -10,27 +10,27 @@ import CachedAsyncImage
 import UIKit
 
 struct DetailRow: View {
-    @State var heroe: HeroeDTO
+    @State var hero: HeroDTO
 
     @AppStorage("isDarkMode") private var isDarkMode = false
 
-    var onFavoriteToggled: (HeroeDTO) async -> Void
+    var onFavoriteToggled: (HeroDTO) async -> Void
 
     var body: some View {
         VStack(spacing: 0) {
 
-            CachedAsyncImage(url: heroe.imageURL, content: { image in
+            CachedAsyncImage(url: hero.imageURL, content: { image in
                 image.brandedDetail()
             }, placeholder: {
                 Image("placeholder").brandedDetail()
             })
 
-            if heroe.comics.isEmpty {
+            if hero.comics.isEmpty {
                 Spacer()
                 Text("This hero has no comics")
                 Spacer()
             } else {
-                List(heroe.comics) { comic in
+                List(hero.comics) { comic in
                     Text(comic.name)
                 }
 
@@ -38,23 +38,23 @@ struct DetailRow: View {
         }.toolbar {
             ToolbarItem {
                 Button(action: {
-                    heroe.isFavorite.toggle()
+                    hero.isFavorite.toggle()
                     Task {
                         await triggerFavoriteButton()
                     }
 
                 }, label: {
 
-                    Label("Add Favorite Heroe", systemImage: heroe.isFavorite ? "star.fill" : "star")
+                    Label("Add Favorite Heroe", systemImage: hero.isFavorite ? "star.fill" : "star")
                 })
             }
         }
-        .navigationTitle(heroe.name)
+        .navigationTitle(hero.name)
         .navigationBarTitleDisplayMode(.inline)
     }
 
     func triggerFavoriteButton() async {
-        await onFavoriteToggled(heroe)
+        await onFavoriteToggled(hero)
     }
 }
 

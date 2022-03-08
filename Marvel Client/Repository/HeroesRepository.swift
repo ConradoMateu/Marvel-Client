@@ -9,7 +9,7 @@ import Foundation
 
 class HeroesRepository: Repository {
 
-    typealias EntityDTO = HeroeDTO
+    typealias EntityDTO = HeroDTO
     typealias Service = HeroeService
 
     var dao: QueryDAO
@@ -20,7 +20,7 @@ class HeroesRepository: Repository {
         self.service = service
     }
 
-    func getHeroes(limit: Int, page: Int, offset: Int) async throws -> [HeroeDTO] {
+    func getHeroes(limit: Int, page: Int, offset: Int) async throws -> [HeroDTO] {
         let cachedMovies = try await self.dao.getAll()
 
         // Call the API is there is no data
@@ -64,15 +64,15 @@ class HeroesRepository: Repository {
 
     }
 
-    func add(hero: HeroeDTO) async -> HeroeDTO {
+    func add(hero: HeroDTO) async -> HeroDTO {
         return await dao.addReplacing(hero)
     }
 
-    func update(hero: HeroeDTO) async -> HeroeDTO {
+    func update(hero: HeroDTO) async -> HeroDTO {
         return await dao.addReplacing(hero)
     }
 
-    func delete(hero: HeroeDTO) async throws -> Bool {
+    func delete(hero: HeroDTO) async throws -> Bool {
         return try await dao.delete(hero)
     }
 

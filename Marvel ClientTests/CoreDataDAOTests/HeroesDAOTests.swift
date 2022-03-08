@@ -14,7 +14,7 @@ class HeroesDAOTests: XCTestCase {
     @JSONFile(named: "response")
     var response: HeroeResponseDTO?
 
-    var heroesWithComics: [HeroeDTO] {
+    var heroesWithComics: [HeroDTO] {
 
         guard let safeHeroes = response?.heroes else {
             fatalError("JSONData Could not be decoded")
@@ -23,7 +23,7 @@ class HeroesDAOTests: XCTestCase {
         return safeHeroes.filter { $0.comics.count != 0 }
     }
 
-    var hero: HeroeDTO!
+    var hero: HeroDTO!
 
     override func setUpWithError() throws {
 
@@ -50,7 +50,7 @@ class HeroesDAOTests: XCTestCase {
 
         _ = await heroesDAO.addReplacing(hero)
 
-        let newHero = HeroeDTO(id: hero.id,
+        let newHero = HeroDTO(id: hero.id,
                                name: "Another Name To Test",
                                description: "Another Description",
                                imageURLString: "http://i.annihil.us.jpg",

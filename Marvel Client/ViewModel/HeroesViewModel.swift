@@ -13,10 +13,10 @@ import SwiftUI
 // Marked as main actor because is attach to the view, an actor execute actions in the main thread
 @MainActor
 class HeroesViewModel: BaseViewModel {
-    typealias EntityDTO = HeroeDTO
+    typealias EntityDTO = HeroDTO
     typealias Repo = HeroesRepository
 
-    @Published var result: [HeroeDTO] = []
+    @Published var result: [HeroDTO] = []
 
     // RequestError from service or CoreDataError from dao
     @Published var error: Error?
@@ -77,7 +77,7 @@ class HeroesViewModel: BaseViewModel {
     }
 
     func addRandomHero() async {
-        let randomUser = HeroeDTO.random
+        let randomUser = HeroDTO.random
 
         withAnimation {
             self.result.append(randomUser)
@@ -88,14 +88,15 @@ class HeroesViewModel: BaseViewModel {
         }
     }
 
-    func toggleFavoriteFor(_ hero: HeroeDTO) async {
+    func toggleFavoriteFor(_ hero: HeroDTO) async {
 
         let heroeIndex = result.indices.filter { result[$0].id == hero.id }.first
 
         if let safeIndex = heroeIndex {
+
             result[safeIndex].isFavorite =  !result[safeIndex].isFavorite
-            self.result = result.sortedByFavorite()
             let heroToUpdate = result[safeIndex]
+            self.result = result.sortedByFavorite()
             _ = await self.repository.update(hero: heroToUpdate)
 
         } else {

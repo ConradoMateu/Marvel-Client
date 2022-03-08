@@ -3,18 +3,18 @@
     <entity name="Comic" representedClassName="Comic" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="ofHeroe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Heroe" inverseName="comics" inverseEntity="Heroe"/>
+        <relationship name="ofHero" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hero" inverseName="comics" inverseEntity="Hero"/>
     </entity>
-    <entity name="Heroe" representedClassName="Heroe" syncable="YES">
-        <attribute name="heroeDescription" optional="YES" attributeType="String"/>
+    <entity name="Hero" representedClassName="Hero" syncable="YES">
+        <attribute name="heroDescription" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="imageURLString" optional="YES" attributeType="String"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="comics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comic" inverseName="ofHeroe" inverseEntity="Comic"/>
+        <relationship name="comics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comic" inverseName="ofHero" inverseEntity="Comic"/>
     </entity>
     <elements>
         <element name="Comic" positionX="105.79296875" positionY="308.375" width="128" height="74"/>
-        <element name="Heroe" positionX="-36" positionY="18" width="128" height="119"/>
+        <element name="Hero" positionX="-36" positionY="18" width="128" height="119"/>
     </elements>
 </model>

@@ -22,10 +22,10 @@ struct ContentView: View {
                     List {
                         ForEach(viewmodel.result, id: \.id) { hero in
                             NavigationLink {
-                                DetailRow(heroe: hero,
+                                DetailRow(hero: hero,
                                           onFavoriteToggled: viewmodel.toggleFavoriteFor)
                             } label: {
-                                HeroeRow(heroe: hero)
+                                HeroeRow(hero: hero)
                             }.task {
                                 if viewmodel.result.count > 0 {
                                     if viewmodel.result.last == hero {

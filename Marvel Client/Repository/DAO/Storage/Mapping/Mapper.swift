@@ -7,12 +7,12 @@
 
 import Foundation
 
-extension Heroe {
+extension Hero {
 
-    func encode(entity: HeroeDTO) {
+    func encode(entity: HeroDTO) {
         self.id = entity.id
         self.name = entity.name
-        self.heroeDescription = entity.description
+        self.heroDescription = entity.description
         self.isFavorite = entity.isFavorite
         self.imageURLString = "\(entity.imagePath).\(entity.imageExtension)"
 
@@ -30,10 +30,10 @@ extension Heroe {
         }
     }
 
-    func decode() -> HeroeDTO {
-        return HeroeDTO(id: self.id!,
+    func decode() -> HeroDTO {
+        return HeroDTO(id: self.id!,
                         name: self.name!,
-                        description: self.heroeDescription ?? "",
+                        description: self.heroDescription ?? "",
                         imageURLString: self.imageURLString ?? "",
                         comics: Array(self.comics ?? [] ).map { $0.decode() },
                         isFavorite: self.isFavorite)

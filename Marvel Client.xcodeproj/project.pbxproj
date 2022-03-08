@@ -40,7 +40,7 @@
 		9BBC2CAE27D003AF00BEAA26 /* JSONLFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CAD27D003AF00BEAA26 /* JSONLFileTests.swift */; };
 		9BBC2CD227D033C300BEAA26 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9BBC2CD127D033C300BEAA26 /* CachedAsyncImage */; };
 		9BBC2CD527D034A200BEAA26 /* HeroeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CD427D034A200BEAA26 /* HeroeResponseDTO.swift */; };
-		9BBC2CD727D0354100BEAA26 /* HeroeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CD627D0354100BEAA26 /* HeroeDTO.swift */; };
+		9BBC2CD727D0354100BEAA26 /* HeroDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CD627D0354100BEAA26 /* HeroDTO.swift */; };
 		9BBC2CE127D0571C00BEAA26 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BBC2CE027D0571C00BEAA26 /* response.json */; };
 		9BBC2CE227D0571C00BEAA26 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BBC2CE027D0571C00BEAA26 /* response.json */; };
 		9BBC2CE527D057C300BEAA26 /* JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CE427D057C300BEAA26 /* JSONFile.swift */; };
@@ -102,7 +102,7 @@
 		9BBC2CA927D003AF00BEAA26 /* Marvel ClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Marvel ClientTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBC2CAD27D003AF00BEAA26 /* JSONLFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLFileTests.swift; sourceTree = "<group>"; };
 		9BBC2CD427D034A200BEAA26 /* HeroeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeResponseDTO.swift; sourceTree = "<group>"; };
-		9BBC2CD627D0354100BEAA26 /* HeroeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeDTO.swift; sourceTree = "<group>"; };
+		9BBC2CD627D0354100BEAA26 /* HeroDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDTO.swift; sourceTree = "<group>"; };
 		9BBC2CE027D0571C00BEAA26 /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
 		9BBC2CE427D057C300BEAA26 /* JSONFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFile.swift; sourceTree = "<group>"; };
 		9BBC2CED27D0619200BEAA26 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
@@ -342,7 +342,7 @@
 			children = (
 				9B8566D627D10C0500699FB6 /* ComicDTO.swift */,
 				9BBC2CD427D034A200BEAA26 /* HeroeResponseDTO.swift */,
-				9BBC2CD627D0354100BEAA26 /* HeroeDTO.swift */,
+				9BBC2CD627D0354100BEAA26 /* HeroDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -527,7 +527,7 @@
 				9BC4CF3327D7FBF200883A8D /* LoaderModifier.swift in Sources */,
 				9B424D0B27D3F09E00B4445C /* HeroesDAO.swift in Sources */,
 				9B415E9727D6CA9800A0E62B /* HeroesViewModel.swift in Sources */,
-				9BBC2CD727D0354100BEAA26 /* HeroeDTO.swift in Sources */,
+				9BBC2CD727D0354100BEAA26 /* HeroDTO.swift in Sources */,
 				9B415E9927D6D7F200A0E62B /* DependencyInjector.swift in Sources */,
 				9B424D0627D3BE0700B4445C /* Storage.swift in Sources */,
 			);

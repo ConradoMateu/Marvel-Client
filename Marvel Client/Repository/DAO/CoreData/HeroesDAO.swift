@@ -9,27 +9,27 @@ import Foundation
 import CoreData
 
 protocol QueryDAO {
-    func addReplacing(_ entity: HeroeDTO) async -> HeroeDTO
-    func getAll() async throws -> [HeroeDTO]
-    func delete(_ entity: HeroeDTO) async throws -> Bool
+    func addReplacing(_ entity: HeroDTO) async -> HeroDTO
+    func getAll() async throws -> [HeroDTO]
+    func delete(_ entity: HeroDTO) async throws -> Bool
     func deleteAll() async throws -> Bool
 
 }
 
-class HeroesDao: CoreDataDAO<HeroeDTO, Heroe>, QueryDAO {
+class HeroesDao: CoreDataDAO<HeroDTO, Hero>, QueryDAO {
 
-    override func encode(entity: HeroeDTO, into object: inout Heroe) {
+    override func encode(entity: HeroDTO, into object: inout Hero) {
         object.encode(entity: entity)
     }
 
-    override func decode(object: Heroe) -> Entity {
+    override func decode(object: Hero) -> Entity {
         return object.decode()
     }
 
     override var sortDescriptors: [NSSortDescriptor]? {
         return [
-            NSSortDescriptor(keyPath: \Heroe.isFavorite, ascending: false),
-            NSSortDescriptor(keyPath: \Heroe.name, ascending: true)
+            NSSortDescriptor(keyPath: \Hero.isFavorite, ascending: false),
+            NSSortDescriptor(keyPath: \Hero.name, ascending: true)
         ]
     }
 }

@@ -16,5 +16,5 @@ struct HeroeResponseDTO: BackedDecodable {
 
     /// Uses custom path for nested JSON
     @Backed(Path("data", "results"))
-    var heroes: [HeroeDTO]
+    var heroes: [HeroDTO]
 }
