@@ -28,20 +28,16 @@ class HeroeServiceTests: XCTestCase {
             return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
         }
 
-        do {
-            // WHEN
-            let res = try await heroeService.getHeroes()
+            do {
 
-            // THEN
-            switch res {
-            case .failure:
+                // WHEN
+                let res = try await heroeService.getHeroes()
+
+                // THEN
+                assert(res.heroes.count == 10)
+            } catch {
                 XCTFail("API Should return success response")
-            case .success(let heroeResponse):
-                assert(heroeResponse.heroes.count == 10)
             }
-        } catch {
-            XCTFail("Could not get Data Response")
-        }
     }
 
     func testShouldReturnDecodingError() async throws {
@@ -52,21 +48,19 @@ class HeroeServiceTests: XCTestCase {
                 return HTTPStubsResponse(data: data,
                                          statusCode: 200,
                                          headers: ["Content-Type": "application/json"])
+            } else {
+                fatalError("Could not encode data")
             }
-
-            fatalError("Could not encode data")
         }
 
         do {
             // WHEN
             let res = try await heroeService.getHeroes()
-            switch res {
-            case .failure(let error):
-                // THEN
-                assert(error == .decode)
-            case .success:
-                XCTFail("Should throw decoding error")
-            }
+
+        } catch  RequestError.decode {
+
+            // THEN
+            assert(true, "Expected Error")
         } catch {
             XCTFail("Could not get Data Response")
         }
@@ -76,25 +70,18 @@ class HeroeServiceTests: XCTestCase {
 
         // GIVEN
         stub(condition: isHost("gateway.marvel.com")) { _ in
-            if let data = try? JSONEncoder().encode("Error JSON") {
-                return HTTPStubsResponse(data: data,
+
+            let stubPath = OHPathForFile("response.json", JSONReusable.self)
+            return HTTPStubsResponse(fileAtPath: stubPath!,
                                          statusCode: 401,
                                          headers: ["Content-Type": "application/json"])
-            }
-
-            fatalError("Could not encode data")
         }
-
         do {
             // WHEN
-            let res = try await heroeService.getHeroes()
-            switch res {
+            _ = try await heroeService.getHeroes()
+        } catch RequestError.unauthorised {
             // THEN
-            case .failure(let error):
-                assert(error == .unauthorised)
-            case .success:
-                XCTFail("Should throw unauthorised error")
-            }
+            assert(true, "Expected Error")
         } catch {
             XCTFail("Could not get Data Response")
         }
@@ -108,47 +95,17 @@ class HeroeServiceTests: XCTestCase {
                 return HTTPStubsResponse(data: data,
                                          statusCode: 500,
                                          headers: ["Content-Type": "application/json"])
+            } else {
+                fatalError("Could not encode data")
             }
-
-            fatalError("Could not encode data")
         }
 
         do {
-
             // WHEN
-            let res = try await heroeService.getHeroes()
-            switch res {
-
+            _ = try await heroeService.getHeroes()
+        } catch RequestError.unknown {
             // THEN
-            case .failure(let error):
-                assert(error == .unexpectedStatusCode)
-            case .success:
-                XCTFail("Should throw unauthorised error")
-            }
-        } catch {
-            XCTFail("Could not get Data Response")
-        }
-    }
-
-    func testShouldReturnUnknownError() async throws {
-
-        // GIVEN
-        stub(condition: isHost("gateway.marvel.com")) { _ in
-                return HTTPStubsResponse(error: RequestError.unknown)
-        }
-
-        do {
-
-            // WHEN
-            let res = try await heroeService.getHeroes()
-            switch res {
-
-            // THEN
-            case .failure(let error):
-                assert(error == .unknown)
-            case .success:
-                XCTFail("Should throw unknown error")
-            }
+            assert(true, "Expected Error")
         } catch {
             XCTFail("Could not get Data Response")
         }

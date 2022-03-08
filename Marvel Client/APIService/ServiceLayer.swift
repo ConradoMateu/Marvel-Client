@@ -44,10 +44,8 @@ extension HTTPClient {
             case 401:
                 throw RequestError.unauthorised
             default:
-                throw RequestError.unexpectedStatusCode
+                throw RequestError.unknown
             }
-        } catch {
-            throw RequestError.unknown
         }
     }
 }
