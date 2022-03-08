@@ -12,46 +12,62 @@ struct ContentView: View {
 
     // Core Data Variables
 
-    @JSONFile(named: "response")
-    var response: HeroeResponseDTO?
-    @State var isNavigationActive = false
-
-    var heroes: [HeroeDTO]? {
-        response?.heroes
-    }
+    @StateObject var viewmodel = HeroesViewModel()
 
     var body: some View {
         NavigationView {
             VStack {
-                if let safeHeroes = heroes {
-                    List(safeHeroes, id: \.name) { item in
-                        VStack {
+                if viewmodel.result.count != 0 {
+                    List {
+                        ForEach(viewmodel.result, id: \.id) { hero in
                             NavigationLink {
-                                DetailRow(heroe: item)
+                                DetailRow(heroe: hero,
+                                          onFavoriteToggled: viewmodel.toggleFavoriteFor)
                             } label: {
-                                HeroeRow(heroe: item)
+                                HeroeRow(heroe: hero)
+                            }.task {
+                                if viewmodel.result.count > 0 {
+                                    if viewmodel.result.last == hero {
+                                        await viewmodel.togglePagination()
+                                    }
+                                }
                             }
-                        }
+                        }.onDelete(perform: delete)
+
+                    }.refreshable {
+                        await viewmodel.getHeroes(isRefreshing: true)
+
                     }
+                } else {
+
+                    Button( action: {
+                        Task {
+                            await viewmodel.getHeroes()
+                        }
+                    }, label: {
+                        Text("Get Heroes")
+                    })
                 }
-                Text("Select A Hero To See Details")
-            }.makeToolbarItems(addItem: addItem, deleteItem: deleteAllItems)
+
+            }.onAppear {
+                Task {
+                    await viewmodel.getHeroes()
+                }
+            }.onDisappear {
+                viewmodel.goingToDetailView()
+            }.makeToolbarItems(addItem: viewmodel.addRandomHero, deleteItem: viewmodel.deleteAllHeroes)
                 .navigationTitle("Heroes")
         } .navigationViewStyle(.stack)
     }
 
-    // TODO: Delete this functions, provide a ViewModel Solution
-    private func addItem() { }
-
-    private func deleteAllItems() { }
+    // Required Function for deleting an element from a swipe
+    func delete(at offsets: IndexSet) {
+        let index = offsets[offsets.startIndex]
+        Task {
+            try await self.viewmodel.deleteHero(index: index)
+        }
+    }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 // struct ContentView_Previews: PreviewProvider {
 //    static var previews: some View {

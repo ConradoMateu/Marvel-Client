@@ -39,14 +39,13 @@ struct HeroeDTO: BackedDecodable, Identifiable, Hashable, CoreDataStorable, Comp
 
     // swiftlint:disable:next line_length
     init(id: String, name: String, description: String, imageURLString: String, comics: [ComicDTO], isFavorite: Bool = false) {
-//        self.id = id
+
         self.id = id
         self.$name = name
         self.$description = description
+
         let urlExtension = imageURLString.fileExtension()
-
         self.$imageExtension = urlExtension
-
         self.$imagePath = imageURLString.replacingOccurrences(of: ".\(urlExtension)", with: "")
         self.$comics = comics
         self.isFavorite = isFavorite
@@ -75,7 +74,7 @@ extension HeroeDTO {
 
     static var random: HeroeDTO {
         HeroeDTO(id: UUID().uuidString,
-                 name: "This hero is a test",
+                 name: "0 - This hero is a test",
                  description: "This is a description for a random user",
                  imageURLString: "http://i.annihil.us/u/prod/marvel/i/mg/3/80/4c00358ec7548.jpg",
                  comics: [],
@@ -91,5 +90,24 @@ extension String {
 
     func fileExtension() -> String {
         return URL(fileURLWithPath: self).pathExtension
+    }
+}
+
+extension Array where Element == HeroeDTO {
+    func sortedByFavorite() -> [HeroeDTO] {
+        return self.sorted(by: {  (lhs, rhs) -> Bool in
+            if lhs.isFavorite && !rhs.isFavorite {
+                return true
+            }
+            if !lhs.isFavorite && rhs.isFavorite {
+                return false
+            }
+
+            if lhs.isFavorite == rhs.isFavorite {
+                return lhs.name < rhs.name
+            }
+
+            return false
+        })
     }
 }

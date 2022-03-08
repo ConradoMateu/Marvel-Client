@@ -8,8 +8,10 @@
 import Foundation
 
 import Combine
+import SwiftUI
 
-class HeroesViewModel: BaseViewModel {
+@MainActor
+class HeroesViewModel: ObservableObject {
 
     @Published var result: [HeroeDTO] = []
 
@@ -26,24 +28,35 @@ class HeroesViewModel: BaseViewModel {
     // For getting next X = limit results
     var nextOffset: Int { result.count + limit }
 
-    required init(repository: HeroesRepository) {
+
+    // Prevent requesting heroes when coming back from detailed view
+    var comingFromDetailView: Bool = false
+
+    private var cancellableBag = Set<AnyCancellable>()
+
+    required init(repository: HeroesRepository = DependencyInjector.getHeroesRepository()) {
         self.repository = repository
     }
 
-    func getHeroes() async {
-        cleanErrors()
-        page += 1
-        do {
-            result = try await repository.getHeroes(limit: limit, page: page, offset: nextOffset)
-        } catch {
-            self.error = error
-        }
+    func goingToDetailView() {
+        comingFromDetailView = true
     }
 
-    func deleteHeroes() async {
-        page = 0
+    func getHeroes(isRefreshing: Bool = false) async {
+        cleanErrors()
         do {
-            try await self.repository.deleteHeroes()
+
+            guard  !comingFromDetailView || isRefreshing else  {
+                self.comingFromDetailView.toggle()
+                return
+            }
+
+            page += 1
+            let newResult = try await repository.getHeroes(limit: limit, page: page, offset: nextOffset).sortedByFavorite()
+            withAnimation {
+                result = newResult
+            }
+
         } catch {
             self.error = error
         }
@@ -51,46 +64,82 @@ class HeroesViewModel: BaseViewModel {
 
     func addRandomHero() async {
         let randomUser = HeroeDTO.random
-        self.result.append(randomUser)
+        withAnimation {
+            self.result.append(randomUser)
+            self.result = result.sortedByFavorite()
+        }
+
         Task {
             await self.repository.add(hero: randomUser)
         }
     }
 
-    func toggleFavoriteFor(_ hero: HeroeDTO) async throws {
+    func toggleFavoriteFor(_ hero: HeroeDTO) async {
 
         let heroeIndex = result.indices.filter { result[$0].id == hero.id }.first
 
         if let safeIndex = heroeIndex {
-            result[safeIndex].isFavorite.toggle()
+            result[safeIndex].isFavorite =  !result[safeIndex].isFavorite
+            self.result = result.sortedByFavorite()
+            let heroToUpdate = result[safeIndex]
+            _ = await self.repository.update(hero: heroToUpdate)
 
-            _ = await self.repository.update(hero: result[safeIndex])
         } else {
-            throw HeroesViewModelError.couldNotUpdateHeroe
+            self.error = HeroesViewModelError.couldNotUpdateHeroe
         }
 
+    }
+
+    func togglePagination() async {
+        if result.count > limit - 1 {
+            do {
+                page += 1
+
+                let newResult = try await repository.getHeroes(limit: limit, page: page, offset: nextOffset)
+
+                withAnimation {
+                    result = newResult.sortedByFavorite()
+                }
+            } catch {
+                self.error = error
+            }
+        }
     }
 
     func cleanErrors() {
         self.error = nil
     }
 
-    func deleteAllHeroes() async throws {
+    func deleteAllHeroes() async {
         do {
+            withAnimation {
+                self.result = []
+            }
+
+            self.page = 0
             try await self.repository.deleteHeroes()
         } catch {
             self.error = error
         }
+    }
+
+    func deleteHeroAnimated(index: Int) {
+        //        withAnimation {
+        //
+        //            self.result.remove(at: index)
+        //        }
+    }
+    func deleteHero(index: Int) async throws {
+        withAnimation {
+            self.result.remove(at: index)
+        }
+        let heroeToRemove = result[index]
+
+        _ = try await self.repository.delete(hero: heroeToRemove)
     }
 }
 
 enum HeroesViewModelError: Error {
     case couldNotUpdateHeroe
     case notConnectedToInternet
-}
-
-struct DependencyInjector {
-    static func getHeroesRepository() -> HeroesRepository {
-        return HeroesRepository(service: HeroeService(), dao: HeroesDao())
-    }
 }

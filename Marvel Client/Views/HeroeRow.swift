@@ -14,14 +14,24 @@ struct HeroeRow: View {
 
         HStack {
             CachedAsyncImage(url: heroe.imageURL, content: { image in
-                image.brandedThmbnail()
+                image.brandedThumbnail()
             }, placeholder: {
-                Image("placeholder").brandedThmbnail()
+                Image("placeholder").brandedThumbnail()
             })
 
-            VStack(alignment: .leading, spacing: 5) {
-                Text(heroe.name)
-                    .lineLimit(1)
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Text(heroe.name)
+                        .lineLimit(1)
+
+                    Spacer()
+                    if heroe.isFavorite {
+                        Image(systemName: "star.fill")
+                            .renderingMode(.template)
+                            .foregroundColor(.yellow)
+                    }
+
+                }
 
                 if heroe.description != "" {
                     Text(heroe.description)
@@ -38,7 +48,7 @@ struct HeroeRow: View {
 }
 
 extension Image {
-    func brandedThmbnail() -> some View {
+    func brandedThumbnail() -> some View {
         self.resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 70, height: 100)
@@ -46,11 +56,11 @@ extension Image {
     }
 }
 
-struct HeroeRow_Previews: PreviewProvider {
-    @JSONFile(named: "response")
-    static var response: HeroeResponseDTO?
-
-    static var previews: some View {
-        response?.heroes.first.map { HeroeRow(heroe: $0)}
-    }
-}
+// struct HeroeRow_Previews: PreviewProvider {
+//    @JSONFile(named: "response")
+//    static var response: HeroeResponseDTO?
+//
+//    static var previews: some View {
+//        response?.heroes.first.map { HeroeRow(heroe: $0)}
+//    }
+// }

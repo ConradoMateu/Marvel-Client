@@ -28,6 +28,7 @@ class HeroesDao: CoreDataDAO<HeroeDTO, Heroe>, QueryDAO {
 
     override var sortDescriptors: [NSSortDescriptor]? {
         return [
+            NSSortDescriptor(keyPath: \Heroe.isFavorite, ascending: false),
             NSSortDescriptor(keyPath: \Heroe.name, ascending: true)
         ]
     }
