@@ -12,7 +12,9 @@ import SwiftUI
 
 // Marked as main actor because is attach to the view, an actor execute actions in the main thread
 @MainActor
-class HeroesViewModel: ObservableObject {
+class HeroesViewModel: BaseViewModel {
+    typealias EntityDTO = HeroeDTO
+    typealias Repo = HeroesRepository
 
     @Published var result: [HeroeDTO] = []
 
@@ -104,7 +106,6 @@ class HeroesViewModel: ObservableObject {
 
     func togglePagination() async {
         if result.count > limit - 1 {
-            cleanErrors()
             do {
                 page += 1
 

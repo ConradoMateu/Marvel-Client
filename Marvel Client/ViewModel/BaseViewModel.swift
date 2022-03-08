@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 protocol BaseViewModel: ObservableObject {
     associatedtype EntityDTO
     associatedtype Repo
