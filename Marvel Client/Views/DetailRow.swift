@@ -18,11 +18,12 @@ struct DetailRow: View {
 
     var body: some View {
         VStack(spacing: 0) {
-                CachedAsyncImage(url: heroe.imageURL, content: { image in
-                    image.brandedDetail()
-                }, placeholder: {
-                    Image("placeholder").brandedDetail()
-                })
+
+            CachedAsyncImage(url: heroe.imageURL, content: { image in
+                image.brandedDetail()
+            }, placeholder: {
+                Image("placeholder").brandedDetail()
+            })
 
             if heroe.comics.isEmpty {
                 Spacer()
@@ -50,7 +51,7 @@ struct DetailRow: View {
         }
 
          .navigationTitle(heroe.name)
-         .padding(.top, 50)
+
          .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -65,7 +66,8 @@ extension Image {
     func brandedDetail() -> some View {
         self.resizable()
             .scaledToFill()
-            .frame(maxWidth: .infinity, maxHeight: 300)
+            .frame(maxWidth: .infinity, maxHeight: 400)
+            .clipped()
     }
 }
 

@@ -28,7 +28,6 @@ class HeroesViewModel: ObservableObject {
     // For getting next X = limit results
     var nextOffset: Int { result.count + limit }
 
-
     // Prevent requesting heroes when coming back from detailed view
     var comingFromDetailView: Bool = false
 
@@ -46,7 +45,7 @@ class HeroesViewModel: ObservableObject {
         cleanErrors()
         do {
 
-            guard  !comingFromDetailView || isRefreshing else  {
+            guard  !comingFromDetailView || isRefreshing else {
                 self.comingFromDetailView.toggle()
                 return
             }
@@ -123,15 +122,9 @@ class HeroesViewModel: ObservableObject {
         }
     }
 
-    func deleteHeroAnimated(index: Int) {
-        //        withAnimation {
-        //
-        //            self.result.remove(at: index)
-        //        }
-    }
     func deleteHero(index: Int) async throws {
         withAnimation {
-            self.result.remove(at: index)
+            _ = self.result.remove(at: index)
         }
         let heroeToRemove = result[index]
 
