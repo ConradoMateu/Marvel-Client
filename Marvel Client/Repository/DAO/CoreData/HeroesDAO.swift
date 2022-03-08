@@ -8,7 +8,15 @@
 import Foundation
 import CoreData
 
-class HeroesDao: CoreDataDAO<HeroeDTO, Heroe> {
+protocol QueryDAO {
+    func addReplacing(_ entity: HeroeDTO) async -> HeroeDTO
+    func getAll() async throws -> [HeroeDTO]
+    func delete(_ entity: HeroeDTO) async throws -> Bool
+    func deleteAll() async throws -> Bool
+
+}
+
+class HeroesDao: CoreDataDAO<HeroeDTO, Heroe>, QueryDAO {
 
     override func encode(entity: HeroeDTO, into object: inout Heroe) {
         object.encode(entity: entity)

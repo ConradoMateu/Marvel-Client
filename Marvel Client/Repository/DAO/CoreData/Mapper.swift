@@ -28,7 +28,6 @@ extension Heroe {
             // Ads Reference between Hero <--> Comics
             self.addToComics(comicObjects)
         }
-
     }
 
     func decode() -> HeroeDTO {

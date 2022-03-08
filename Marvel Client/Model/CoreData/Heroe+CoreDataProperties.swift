@@ -41,6 +41,6 @@ extension Heroe {
 
 }
 
-extension Heroe : Identifiable {
+extension Heroe: Identifiable {
 
 }

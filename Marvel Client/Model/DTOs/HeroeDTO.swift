@@ -72,6 +72,15 @@ extension HeroeDTO {
         let urlString = String("\(imagePath).\(imageExtension)")
         return URL(string: urlString)!
     }
+
+    static var random: HeroeDTO {
+        HeroeDTO(id: UUID().uuidString,
+                 name: "This hero is a test",
+                 description: "This is a description for a random user",
+                 imageURLString: "http://i.annihil.us/u/prod/marvel/i/mg/3/80/4c00358ec7548.jpg",
+                 comics: [],
+                 isFavorite: false)
+    }
 }
 
 extension String {

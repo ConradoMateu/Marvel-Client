@@ -8,11 +8,11 @@
 import Foundation
 
 protocol HeroeServiceProtocol {
-    func getHeroes(offset: String) async throws -> Result<HeroeResponseDTO, RequestError>
+    func getHeroes(offset: String, limit: String) async throws -> HeroeResponseDTO
 }
 
 struct HeroeService: HTTPClient, HeroeServiceProtocol {
-     func getHeroes(offset: String = "0") async throws -> Result<HeroeResponseDTO, RequestError> {
+    func getHeroes(offset: String = "0", limit: String = "10") async throws -> HeroeResponseDTO {
         return try await sendRequest(endpoint: .heroes(offset: offset), responseModel: HeroeResponseDTO.self)
     }
 }

@@ -62,6 +62,7 @@ class HeroeServiceTests: XCTestCase {
             let res = try await heroeService.getHeroes()
             switch res {
             case .failure(let error):
+                // THEN
                 assert(error == .decode)
             case .success:
                 XCTFail("Should throw decoding error")

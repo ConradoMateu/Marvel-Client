@@ -43,7 +43,6 @@ struct ContentView: View {
     // TODO: Delete this functions, provide a ViewModel Solution
     private func addItem() { }
 
-
     private func deleteAllItems() { }
 }
 
@@ -54,8 +53,8 @@ private let itemFormatter: DateFormatter = {
     return formatter
 }()
 
-//struct ContentView_Previews: PreviewProvider {
+// struct ContentView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 //    }
-//}
+// }

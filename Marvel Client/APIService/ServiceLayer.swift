@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HTTPClient {
-    func sendRequest<T: Decodable>(endpoint: Router, responseModel: T.Type) async throws -> Result<T, RequestError>
+    func sendRequest<T: Decodable>(endpoint: Router, responseModel: T.Type) async throws -> T
 }
 
 /// Usage let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
@@ -16,7 +16,7 @@ extension HTTPClient {
     func sendRequest<T: Decodable>(
         endpoint: Router,
         responseModel: T.Type
-    ) async throws -> Result<T, RequestError> {
+    ) async throws -> T {
 
         var request = URLComponents(string: endpoint.url)!
 
@@ -24,7 +24,7 @@ extension HTTPClient {
             request.queryItems = parameters
         }
 
-        guard let url = request.url else { return .failure(RequestError.invalidURL)  }
+        guard let url = request.url else { throw RequestError.invalidURL }
 
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -33,21 +33,21 @@ extension HTTPClient {
         do {
             let (data, response) = try await URLSession.shared.data(for: urlRequest, delegate: nil)
             guard let response = response as? HTTPURLResponse else {
-                return .failure(.noResponse)
+                throw RequestError.noResponse
             }
             switch response.statusCode {
             case 200...299:
                 guard let decodedResponse = try? JSONDecoder().decode(responseModel, from: data) else {
-                    return .failure(.decode)
+                    throw RequestError.decode
                 }
-                return .success(decodedResponse)
+                return decodedResponse
             case 401:
-                return .failure(.unauthorised)
+                throw RequestError.unauthorised
             default:
-                return .failure(.unexpectedStatusCode)
+                throw RequestError.unexpectedStatusCode
             }
         } catch {
-            return .failure(.unknown)
+            throw RequestError.unknown
         }
     }
 }
