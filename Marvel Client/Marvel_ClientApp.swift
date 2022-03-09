@@ -13,7 +13,7 @@ struct MarvelApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HeroesListView()
                 .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }

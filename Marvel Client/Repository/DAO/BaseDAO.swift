@@ -21,5 +21,4 @@ protocol BaseDAO {
     func getAll() async throws -> [Entity]
     func delete(_ entity: Entity) async throws -> Bool
     func deleteAll() async throws -> Bool
-
 }

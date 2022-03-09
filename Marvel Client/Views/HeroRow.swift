@@ -8,7 +8,7 @@
 import SwiftUI
 import CachedAsyncImage
 
-struct HeroeRow: View {
+struct HeroRow: View {
     var hero: HeroDTO
     var body: some View {
 
@@ -56,11 +56,14 @@ extension Image {
     }
 }
 
-// struct HeroeRow_Previews: PreviewProvider {
-//    @JSONFile(named: "response")
-//    static var response: HeroeResponseDTO?
-//
-//    static var previews: some View {
-//        response?.heroes.first.map { HeroeRow(heroe: $0)}
-//    }
-// }
+ struct HeroeRow_Previews: PreviewProvider {
+    @JSONFile(named: "response")
+    static var response: HeroeResponseDTO?
+
+    static var previews: some View {
+        List(response!.heroes) { hero in
+             HeroRow(hero: hero)
+        }
+
+    }
+ }

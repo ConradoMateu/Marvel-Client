@@ -10,47 +10,46 @@ import Foundation
 class HeroesRepository: Repository {
 
     typealias EntityDTO = HeroDTO
-    typealias Service = HeroeService
+    typealias Service = HeroeServiceProtocol
 
     var dao: QueryDAO
     var service: Service
 
-    required init(service: Service, dao: QueryDAO) {
+    required init(service: HeroeServiceProtocol, dao: QueryDAO) {
         self.dao = dao
         self.service = service
     }
 
     func getHeroes(limit: Int, page: Int, offset: Int) async throws -> [HeroDTO] {
-        let cachedMovies = try await self.dao.getAll()
+        let cachedHeroes = try await self.dao.getAll()
 
         // Call the API is there is no data
-        guard !cachedMovies.isEmpty else {
-            let newHeroes = try await self.service.getHeroes(limit: String(limit)).heroes
+        guard !cachedHeroes.isEmpty else {
+            let newHeroes = try await self.service.getHeroes(offset: "\(offset)", limit: String(limit)).heroes
             for hero in newHeroes {
                 _ = await dao.addReplacing(hero)
             }
-
             return newHeroes
-
         }
 
-        // When `cachedMovies.count / page` < 1 , the cached data is not enough so an API call needs to be done
+        // When (cachedHeroes.count / limit) < page , the cached data is not enough so an API call needs to be done
         // Page 0 is false to prevent division by cero, in this case there is no need to call to the API
-        print("cached movies \(cachedMovies.count), needsAPICall? : \((cachedMovies.count / limit) < page) ")
-        let needsAPICall: Bool = page == 0 ? false : (cachedMovies.count / limit) < page
+        let needsAPICall: Bool = page == 0 ? false : (cachedHeroes.count / limit) < page
+
+        print("cached heroes \(cachedHeroes.count), needsAPICall? : \(needsAPICall)")
 
         guard needsAPICall else {
 
             // swiftlint:disable:next line_length
-            // Checking if cachedMovies.count < limit * page to do not get out of bounds for getting results with pagination, not all the array
+            // if there is no more cached data available in the next page, cachedHeroes array could be out of bounds if cachedHeroes[0..<maxHeroesPerPage], instead the completed cachedHeroes in DB should be returned
             let maxHeroesPerPage: Int = limit * page
-            let shouldShowCachedMovies = cachedMovies.count < limit * page
+            let shouldShowCachedHeroes = cachedHeroes.count < limit * page
 
-            // if there is no more data available, all cached data should be shown
+            print(shouldShowCachedHeroes)
             // swiftlint:disable:next line_length
-            // Otherwise If there is more cached data if we are not in the last page, data need to be constrained per page.
-            let tests  = shouldShowCachedMovies ? cachedMovies : Array(cachedMovies[0..<maxHeroesPerPage])
-            return Array(tests)
+            // Otherwise If there is more cached data we are not in the last page, data needs to be constrained per page.
+            let newHeroesToReturn  = shouldShowCachedHeroes ? cachedHeroes : Array(cachedHeroes[0..<maxHeroesPerPage])
+            return newHeroesToReturn
         }
 
         let newHeroes = try await self.service.getHeroes(offset: "\(offset)", limit: "\(limit)").heroes
@@ -59,8 +58,8 @@ class HeroesRepository: Repository {
         for hero in newHeroes {
             _ = await dao.addReplacing(hero)
         }
-        // Return the union of cached movies + heroes, removing duplicates
-        return Array(Set(cachedMovies + newHeroes))
+        // Return the union of cached heroes + newHeroes from API, removing duplicates
+        return Array(Set(cachedHeroes + newHeroes))
 
     }
 

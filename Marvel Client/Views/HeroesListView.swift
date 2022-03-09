@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HeroesListView.swift
 //  Marvel Client
 //
 //  Created by Conrado Mateu Gisbert on 2/3/22.
@@ -8,9 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
-
-    // Core Data Variables
+struct HeroesListView: View {
 
     @StateObject var viewmodel = HeroesViewModel()
 
@@ -25,7 +23,7 @@ struct ContentView: View {
                                 DetailRow(hero: hero,
                                           onFavoriteToggled: viewmodel.toggleFavoriteFor)
                             } label: {
-                                HeroeRow(hero: hero)
+                                HeroRow(hero: hero)
                             }.task {
                                 if viewmodel.result.count > 0 {
                                     if viewmodel.result.last == hero {
@@ -83,8 +81,9 @@ struct ContentView: View {
     }
 }
 
-// struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-//    }
-// }
+ struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        HeroesListView(viewmodel: HeroesViewModel(repository: DependencyInjector.fakeRepository()))
+            .preferredColorScheme(.dark)
+    }
+ }

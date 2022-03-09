@@ -14,7 +14,7 @@ struct DetailRow: View {
 
     @AppStorage("isDarkMode") private var isDarkMode = false
 
-    var onFavoriteToggled: (HeroDTO) async -> Void
+    var onFavoriteToggled: ((HeroDTO) async -> Void)?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -54,7 +54,10 @@ struct DetailRow: View {
     }
 
     func triggerFavoriteButton() async {
-        await onFavoriteToggled(hero)
+        if let onFavoriteToggled = onFavoriteToggled {
+            await onFavoriteToggled(hero)
+        }
+
     }
 }
 
@@ -67,11 +70,11 @@ extension Image {
     }
 }
 
-// struct DetailRow_Previews: PreviewProvider {
-//    @JSONFile(named: "response")
-//    static var response: HeroeResponseDTO?
-//
-//    static var previews: some View {
-//        response?.heroes.randomElement().map { DetailRow(heroe: $0)}
-//    }
-// }
+ struct DetailRow_Previews: PreviewProvider {
+    @JSONFile(named: "response")
+    static var response: HeroeResponseDTO?
+    static var randomHero: HeroDTO = response!.heroes.randomElement()!
+    static var previews: some View {
+        DetailRow(hero: randomHero, onFavoriteToggled: nil ).edgesIgnoringSafeArea(.top)
+    }
+ }
