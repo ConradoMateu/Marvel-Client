@@ -18,4 +18,3 @@ class JSONFileTests: XCTestCase {
         assert(response?.heroes.count == 10)
     }
 }
-
