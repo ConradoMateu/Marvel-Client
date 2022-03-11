@@ -49,27 +49,26 @@ struct HeroesListView: View {
                         .controlSize(.large)
                 }
 
-            }
+            }                .alert(isPresented: $viewmodel.triggerInternetAlert, content: {
+                return Alert(title: Text("No Internet Connection"),
+                             message: Text("Please enable Wifi or Cellular data"),
+                             dismissButton: .default(Text("OK")))
+            })
+
                 .onAppear {
                 Task {
                     await viewmodel.getHeroes()
                 }
             }.onDisappear {
                 viewmodel.goingToDetailView()
-            }
-                .makeToolbarItems(addItem: viewmodel.addRandomHero, deleteItem: viewmodel.deleteAllHeroes)
-                .alert(isPresented: $viewmodel.triggerInternetAlert, content: {
-                    return Alert(title: Text("No Internet Connection"),
-                                 message: Text("Please enable Wifi or Cellular data"),
-                                 dismissButton: .default(Text("OK")))
-                })
-                .alert(isPresented: $viewmodel.triggerErrorAlert, content: {
-                    return Alert(title: Text("An Error Has Occurred"),
-                                 message: Text(viewmodel.error?.localizedDescription ?? ""),
-                                 dismissButton: .default(Text("OK")))
-                })
+            }.makeToolbarItems(addItem: viewmodel.addRandomHero, deleteItem: viewmodel.deleteAllHeroes)
                 .navigationTitle("Heroes")
-        } .navigationViewStyle(.stack).loaderViewWrapper(isLoading: viewmodel.isLoading)
+        }.navigationViewStyle(.stack).loaderViewWrapper(isLoading: viewmodel.isLoading)
+            .alert(isPresented: $viewmodel.triggerErrorAlert, content: {
+                return Alert(title: Text("An Error Has Occurred"),
+                             message: Text(viewmodel.error?.localizedDescription ?? ""),
+                             dismissButton: .default(Text("OK")))
+            })
     }
 
     // Required Function for deleting an element from a swipe
