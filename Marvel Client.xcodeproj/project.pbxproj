@@ -51,7 +51,6 @@
 		9BBC2CFD27D07E1500BEAA26 /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2CFC27D07E1500BEAA26 /* DetailRow.swift */; };
 		9BBC2D0127D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */; };
 		9BBC2D0227D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */; };
-		9BC4CF3127D7FB9500883A8D /* MarvelProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC4CF3027D7FB9500883A8D /* MarvelProgressView.swift */; };
 		9BC4CF3327D7FBF200883A8D /* LoaderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC4CF3227D7FBF200883A8D /* LoaderModifier.swift */; };
 		9BC4CF3627D8255C00883A8D /* HeroRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC4CF3527D8255C00883A8D /* HeroRepositoryTests.swift */; };
 		9BF2E0D127D19CAE00F0E400 /* BackedCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF2E0D027D19CAE00F0E400 /* BackedCodable */; };
@@ -111,7 +110,6 @@
 		9BBC2CFB27D075F100BEAA26 /* Marvel-Client-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Marvel-Client-Info.plist"; sourceTree = SOURCE_ROOT; };
 		9BBC2CFC27D07E1500BEAA26 /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		9BBC2D0027D07E5400BEAA26 /* ThemeSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitcher.swift; sourceTree = "<group>"; };
-		9BC4CF3027D7FB9500883A8D /* MarvelProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelProgressView.swift; sourceTree = "<group>"; };
 		9BC4CF3227D7FBF200883A8D /* LoaderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderModifier.swift; sourceTree = "<group>"; };
 		9BC4CF3527D8255C00883A8D /* HeroRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroRepositoryTests.swift; sourceTree = "<group>"; };
 		9BFCDDBE27D247A300EB5D80 /* ServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
@@ -325,7 +323,6 @@
 				9BBC2C9927D003AE00BEAA26 /* HeroesListView.swift */,
 				9BBC2CF227D06E2F00BEAA26 /* HeroRow.swift */,
 				9BBC2CFC27D07E1500BEAA26 /* DetailRow.swift */,
-				9BC4CF3027D7FB9500883A8D /* MarvelProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -528,7 +525,6 @@
 				9BBC2CE527D057C300BEAA26 /* JSONFile.swift in Sources */,
 				9BBC2CA427D003AF00BEAA26 /* Marvel_Client.xcdatamodeld in Sources */,
 				9B8566D727D10C0500699FB6 /* ComicDTO.swift in Sources */,
-				9BC4CF3127D7FB9500883A8D /* MarvelProgressView.swift in Sources */,
 				9BBC2CD527D034A200BEAA26 /* HeroeResponseDTO.swift in Sources */,
 				9B415E9527D6CA8F00A0E62B /* BaseViewModel.swift in Sources */,
 				9B415E9127D6A9E500A0E62B /* HeroesRepository.swift in Sources */,
