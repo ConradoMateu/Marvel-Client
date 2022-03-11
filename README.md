@@ -12,7 +12,7 @@ iOS 15 Client for Marvel API with the following features:
 - SwiftUI
 - Async/Await
 - Theme Switcher
-- Core Data persistence with Async/Await approach + One To Many Relatinshop
+- Core Data persistence with Async/Await approach + One To Many Relationship
 - DAO, Repository and Dependency Injection Design Patterns
 - Unit Testing: Network Layer, CoreData DAO, Repository, JSON Decodable
 
