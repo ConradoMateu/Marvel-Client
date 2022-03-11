@@ -53,3 +53,14 @@ iOS 15 Client for Marvel API with the following features:
 -	No Internet Connection Pop-Up
 -	Empty State
 -	Persistent Data
+
+## Screenshots
+
+<div id="myimages">
+<img src="Resources/App-1.png" width="300" height="649">
+<img src="Resources/App-2.png" width="300" height="649">
+<img src="Resources/App-3.png" width="300" height="649">
+<img src="Resources/App-4.png" width="300" height="649">
+<img src="Resources/App-5.png" width="300" height="649">
+<img src="Resources/App-6.png" width="300" height="649">
+</div>
