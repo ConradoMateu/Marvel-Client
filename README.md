@@ -33,7 +33,7 @@ iOS 15 Client for Marvel API with the following features:
 </p>
 
 
- Dependencies installed via SwiftPM:
+## Dependencies installed via SwiftPM:
 - [Backed Decobale](https://github.com/jegnux/BackedCodable) property wrappers for nested JSON.
 - [OHTTPS:](https://github.com/AliSoftware/OHHTTPStubs) framework for stubbing network requests.
 - [Swiftlint:](https://github.com/realm/SwiftLint) linter for cleaner code.
