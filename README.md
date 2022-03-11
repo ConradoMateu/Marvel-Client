@@ -19,7 +19,7 @@ iOS 15 Client for Marvel API with the following features:
 ## Set-Up
 
 1. Register in https://developer.marvel.com/ 
-2.  Replace private and Public Key variables in /APIService/Router.swift
+2. Replace Private and Public Key variables in /APIService/Router.swift
 3. Install Swiftlint via `brew install swiftlint`
 4. Xcode 13 should be installed
 
@@ -29,7 +29,7 @@ iOS 15 Client for Marvel API with the following features:
 
 
 <p align="center">
-  <img width="600" src="./Resources/Architecture.png" alt="Marvel Client">
+  <img width="800" src="./Resources/Architecture.png" alt="Marvel Client">
 </p>
 
 
