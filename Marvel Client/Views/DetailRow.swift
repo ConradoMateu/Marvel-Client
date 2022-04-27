@@ -12,13 +12,9 @@ import UIKit
 struct DetailRow: View {
     @State var hero: HeroDTO
 
-    @AppStorage("isDarkMode") private var isDarkMode = false
-
     var onFavoriteToggled: ((HeroDTO) async -> Void)?
-
     var body: some View {
         VStack(spacing: 0) {
-
             CachedAsyncImage(url: hero.imageURL, content: { image in
                 image.brandedDetail()
             }, placeholder: {
@@ -33,7 +29,6 @@ struct DetailRow: View {
                 List(hero.comics) { comic in
                     Text(comic.name)
                 }
-
             }
         }.toolbar {
             ToolbarItem {
@@ -42,9 +37,7 @@ struct DetailRow: View {
                     Task {
                         await triggerFavoriteButton()
                     }
-
                 }, label: {
-
                     Label("Add Favorite Heroe", systemImage: hero.isFavorite ? "star.fill" : "star")
                 })
             }
@@ -57,7 +50,6 @@ struct DetailRow: View {
         if let onFavoriteToggled = onFavoriteToggled {
             await onFavoriteToggled(hero)
         }
-
     }
 }
 

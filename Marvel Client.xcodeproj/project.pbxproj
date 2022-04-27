@@ -151,6 +151,15 @@
 			path = ErrorHandling;
 			sourceTree = "<group>";
 		};
+		91830DBC2819F3A500005DAE /* HeroesViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9B415E9627D6CA9800A0E62B /* HeroesViewModel.swift */,
+				91830DBA2819EBB500005DAE /* HeroesViewModelError.swift */,
+			);
+			path = HeroesViewModel;
+			sourceTree = "<group>";
+		};
 		9B415E8B27D6335D00A0E62B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,9 +191,8 @@
 		9B415E9227D6CA7D00A0E62B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				91830DBC2819F3A500005DAE /* HeroesViewModel */,
 				9B415E9427D6CA8F00A0E62B /* BaseViewModel.swift */,
-				9B415E9627D6CA9800A0E62B /* HeroesViewModel.swift */,
-				91830DBA2819EBB500005DAE /* HeroesViewModelError.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

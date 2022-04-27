@@ -14,49 +14,63 @@ struct HeroesListView: View {
 
     @State var query: String = ""
     var body: some View {
-        NavigationView {
             VStack {
                 if viewmodel.heroes.count != 0 {
-                    List {
-                        ForEach(viewmodel.heroes, id: \.id) { hero in
-                            NavigationLink {
-                                DetailRow(hero: hero,
-                                          onFavoriteToggled: viewmodel.toggleFavoriteFor)
-                            } label: {
-                                HeroRow(hero: hero)
-                            }.task {
-                                // Triggers pagination when reaching bottom
-                                if viewmodel.canTriggerPagination(for: hero) {
-                                    await viewmodel.togglePagination()
-                                }
-                            }
-                        }.onDelete(perform: delete)
-                            .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
-                    }.refreshable {
-                        await viewmodel.getHeroes(isRefreshing: true)
-                    }
+                    heroesView()
                 } else {
-                    Button( action: {
-                        Task {
-                            await viewmodel.getHeroes()
-                        }
-                    }, label: {
-                        Text("Get Heroes")
-                    }).buttonStyle(.borderedProminent)
-                        .controlSize(.large)
+                    emptyView()
                 }
-            }.searchable(text: $query) .onChange(of: query) { newQuery in
-                viewmodel.triggerSearch(for: newQuery)
-            }.onAppear {
+            }
+            .loaderViewWrapper(isLoading: viewmodel.isLoading)
+            .withErrorHandling(error: $viewmodel.viewModelError)
+            .onDisappear { viewmodel.goingToDetailView() }
+            .onAppear {
                 Task {
                     await viewmodel.getHeroes()
                 }
-            }.onDisappear { viewmodel.goingToDetailView() }
-            .makeToolbarItems(addItem: viewmodel.addRandomHero, deleteItem: viewmodel.deleteAllHeroes)
-            .navigationTitle("Heroes")
+            }
+    }
+
+    func heroesView() -> some View {
+        NavigationView {
+            List {
+                ForEach(viewmodel.heroes, id: \.id) { hero in
+                    NavigationLink {
+                        DetailRow(hero: hero,
+                                  onFavoriteToggled: viewmodel.toggleFavoriteFor)
+                    } label: {
+                        HeroRow(hero: hero)
+                    }.task {
+                        // Triggers pagination when reaching bottom
+                        if viewmodel.canTriggerPagination(for: hero) {
+                            await viewmodel.togglePagination()
+                        }
+                    }
+                }.onDelete(perform: delete)
+                    .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
+            }.refreshable {
+                await viewmodel.getHeroes(isRefreshing: true)
+            }.navigationTitle("Heroes")            .makeToolbarItems(addItem: viewmodel.addRandomHero,
+                                                                     deleteItem: viewmodel.deleteAllHeroes)
         }.navigationViewStyle(.stack)
-        .loaderViewWrapper(isLoading: viewmodel.isLoading)
-        .withErrorHandling(error: $viewmodel.viewModelError)
+        .searchable(text: $query) .onChange(of: query) { newQuery in
+            viewmodel.triggerSearch(for: newQuery)
+        }
+    }
+    
+    func emptyView() -> some View {
+        NavigationView {
+            Button( action: {
+                Task {
+                    await viewmodel.getHeroes()
+                }
+            }, label: {
+                Text("Get Heroes")
+            }).buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .makeToolbarItems(addItem: viewmodel.addRandomHero,
+                                  deleteItem: viewmodel.deleteAllHeroes)
+        }
     }
 
     // Required Function for deleting an element from a swipe

@@ -30,7 +30,6 @@ struct HeroRow: View {
                             .renderingMode(.template)
                             .foregroundColor(.yellow)
                     }
-
                 }
 
                 if hero.description != "" {
@@ -42,7 +41,6 @@ struct HeroRow: View {
                     Spacer()
                 }
             }.padding()
-
         }
     }
 }
@@ -59,7 +57,6 @@ extension Image {
  struct HeroeRow_Previews: PreviewProvider {
     @JSONFile(named: "response")
     static var response: HeroeResponseDTO?
-
     static var previews: some View {
         List(response!.heroes) { hero in
              HeroRow(hero: hero)
