@@ -9,33 +9,32 @@ import SwiftUI
 import CoreData
 
 struct HeroesListView: View {
-
+    /// Waiting for Swift 6 for this warning https://twitter.com/andresr_develop/status/1509287460961927186?s=21
     @StateObject var viewmodel = HeroesViewModel()
 
+    @State var query: String = ""
     var body: some View {
         NavigationView {
             VStack {
 
-                if viewmodel.result.count != 0 {
+                if viewmodel.heroes.count != 0 {
                     List {
-                        ForEach(viewmodel.result, id: \.id) { hero in
+                        ForEach(viewmodel.heroes, id: \.id) { hero in
                             NavigationLink {
                                 DetailRow(hero: hero,
                                           onFavoriteToggled: viewmodel.toggleFavoriteFor)
                             } label: {
                                 HeroRow(hero: hero)
                             }.task {
-                                if viewmodel.result.count > 0 {
-                                    if viewmodel.result.last == hero {
-                                        await viewmodel.togglePagination()
-                                    }
+                                // Triggers pagination when reaching bottom
+                                if viewmodel.canTriggerPagination(for: hero) {
+                                    await viewmodel.togglePagination()
                                 }
                             }
                         }.onDelete(perform: delete)
 
                     }.refreshable {
                         await viewmodel.getHeroes(isRefreshing: true)
-
                     }
                 } else {
 
@@ -55,7 +54,7 @@ struct HeroesListView: View {
                              dismissButton: .default(Text("OK")))
             })
 
-                .onAppear {
+            .onAppear {
                 Task {
                     await viewmodel.getHeroes()
                 }
@@ -63,12 +62,16 @@ struct HeroesListView: View {
                 viewmodel.goingToDetailView()
             }.makeToolbarItems(addItem: viewmodel.addRandomHero, deleteItem: viewmodel.deleteAllHeroes)
                 .navigationTitle("Heroes")
-        }.navigationViewStyle(.stack).loaderViewWrapper(isLoading: viewmodel.isLoading)
+        }.navigationViewStyle(.stack)
             .alert(isPresented: $viewmodel.triggerErrorAlert, content: {
                 return Alert(title: Text("An Error Has Occurred"),
                              message: Text(viewmodel.error?.localizedDescription ?? ""),
                              dismissButton: .default(Text("OK")))
-            })
+            }).searchable(text: $query) .onChange(of: query) { newQuery in
+                    viewmodel.triggerSearch(for: newQuery)
+                }
+
+            .loaderViewWrapper(isLoading: viewmodel.isLoading)
     }
 
     // Required Function for deleting an element from a swipe
@@ -80,9 +83,9 @@ struct HeroesListView: View {
     }
 }
 
- struct ContentView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         HeroesListView(viewmodel: HeroesViewModel(repository: DependencyInjector.fakeRepository()))
             .preferredColorScheme(.dark)
     }
- }
+}

@@ -10,18 +10,43 @@ import Foundation
 import Combine
 import SwiftUI
 
+enum HeroesViewModelError: Error {
+    case couldNotUpdateHeroe
+    case notConnectedToInternet
+}
+
 // Marked as main actor because is attach to the view, an actor execute actions in the main thread
 @MainActor
 class HeroesViewModel: BaseViewModel {
     typealias EntityDTO = HeroDTO
     typealias Repo = HeroesRepository
 
-    @Published var result: [HeroDTO] = []
+    @Published var heroes: [HeroDTO] = []
+
+    var result: [HeroDTO] = [] {
+        didSet {
+            withAnimation {
+                heroes = result
+            }
+        }
+    }
+
+    var filteredResults: [HeroDTO] = [] {
+        didSet {
+            withAnimation {
+                if !filteredResults.isEmpty {
+                    heroes = filteredResults
+                } else {
+                    heroes = result
+                }
+            }
+        }
+    }
 
     // RequestError from service or CoreDataError from dao
     @Published var error: Error?
 
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
 
     @Published var triggerInternetAlert: Bool = false
     @Published var triggerErrorAlert: Bool = false
@@ -43,9 +68,7 @@ class HeroesViewModel: BaseViewModel {
         self.repository = repository
     }
 
-    func goingToDetailView() {
-        comingFromDetailView = true
-    }
+    // MARK: CRUD Methods
 
     func getHeroes(isRefreshing: Bool = false) async {
         cleanErrors()
@@ -55,17 +78,22 @@ class HeroesViewModel: BaseViewModel {
                 self.comingFromDetailView.toggle()
                 return
             }
+
             withAnimation {
-                isLoading.toggle()
+                isLoading = true
             }
             page += 1
             let newResult = try await repository.getHeroes(limit: limit,
                                                            page: page,
+
                                                            offset: nextOffset).sortedByFavorite()
-            isLoading.toggle()
+
             withAnimation {
-                result = newResult
+                isLoading = false
             }
+
+            result = newResult
+
         } catch RequestError.offline {
             self.triggerInternetAlert = true
             self.isLoading = false
@@ -79,13 +107,39 @@ class HeroesViewModel: BaseViewModel {
     func addRandomHero() async {
         let randomUser = HeroDTO.random
 
-        withAnimation {
-            self.result.append(randomUser)
-            self.result = result.sortedByFavorite()
-        }
+        self.result.append(randomUser)
+        self.result = result.sortedByFavorite()
+
         Task {
             await self.repository.add(hero: randomUser)
         }
+    }
+
+    func deleteAllHeroes() async {
+        do {
+            self.result = []
+            self.page = 0
+            try await self.repository.deleteHeroes()
+        } catch {
+            self.error = error
+        }
+    }
+
+    func deleteHero(index: Int) async throws {
+
+        _ = self.result.remove(at: index)
+
+        let heroeToRemove = result[index]
+
+        _ = try await self.repository.delete(hero: heroeToRemove)
+    }
+
+    // MARK: ViewHelpers
+
+    func canTriggerPagination(for hero: HeroDTO) -> Bool {
+        return result.count > 0 &&
+        filteredResults.isEmpty &&
+        result.last == hero ? true : false
     }
 
     func toggleFavoriteFor(_ hero: HeroDTO) async {
@@ -112,9 +166,8 @@ class HeroesViewModel: BaseViewModel {
 
                 let newResult = try await repository.getHeroes(limit: limit, page: page, offset: nextOffset)
 
-                withAnimation {
-                    result = newResult.sortedByFavorite()
-                }
+                result = newResult.sortedByFavorite()
+
             } catch RequestError.offline {
                 self.triggerInternetAlert = true
                 self.isLoading = false
@@ -124,11 +177,20 @@ class HeroesViewModel: BaseViewModel {
 
                 // When a Task is cancelled
                 guard (error as NSError?)?.code == NSURLErrorCancelled  else {
-                   // Do Your stuff
                     self.error = error
                     self.triggerErrorAlert = true
                     return
                 }
+            }
+        }
+    }
+
+    func triggerSearch(for query: String) {
+        if query == "" {
+            filteredResults = []
+        } else {
+            filteredResults = result.filter {
+                $0.name.lowercased().contains(query.lowercased()) || $0.description.lowercased().contains(query.lowercased())
             }
         }
     }
@@ -139,30 +201,8 @@ class HeroesViewModel: BaseViewModel {
         self.triggerErrorAlert = false
     }
 
-    func deleteAllHeroes() async {
-        do {
-            withAnimation {
-                self.result = []
-            }
-
-            self.page = 0
-            try await self.repository.deleteHeroes()
-        } catch {
-            self.error = error
-        }
+    func goingToDetailView() {
+        comingFromDetailView = true
     }
 
-    func deleteHero(index: Int) async throws {
-        withAnimation {
-            _ = self.result.remove(at: index)
-        }
-        let heroeToRemove = result[index]
-
-        _ = try await self.repository.delete(hero: heroeToRemove)
-    }
-}
-
-enum HeroesViewModelError: Error {
-    case couldNotUpdateHeroe
-    case notConnectedToInternet
 }
