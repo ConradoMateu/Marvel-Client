@@ -9,14 +9,13 @@ import SwiftUI
 import CoreData
 
 struct HeroesListView: View {
-    /// Waiting for Swift 6 for this warning https://twitter.com/andresr_develop/status/1509287460961927186?s=21
+    /// Waiting for Swift 6 to see how this is handled https://twitter.com/andresr_develop/status/1509287460961927186?s=21
     @StateObject var viewmodel = HeroesViewModel()
 
     @State var query: String = ""
     var body: some View {
         NavigationView {
             VStack {
-
                 if viewmodel.heroes.count != 0 {
                     List {
                         ForEach(viewmodel.heroes, id: \.id) { hero in
@@ -32,12 +31,11 @@ struct HeroesListView: View {
                                 }
                             }
                         }.onDelete(perform: delete)
-
+                            .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
                     }.refreshable {
                         await viewmodel.getHeroes(isRefreshing: true)
                     }
                 } else {
-
                     Button( action: {
                         Task {
                             await viewmodel.getHeroes()
@@ -47,31 +45,18 @@ struct HeroesListView: View {
                     }).buttonStyle(.borderedProminent)
                         .controlSize(.large)
                 }
-
-            }                .alert(isPresented: $viewmodel.triggerInternetAlert, content: {
-                return Alert(title: Text("No Internet Connection"),
-                             message: Text("Please enable Wifi or Cellular data"),
-                             dismissButton: .default(Text("OK")))
-            })
-
-            .onAppear {
+            }.searchable(text: $query) .onChange(of: query) { newQuery in
+                viewmodel.triggerSearch(for: newQuery)
+            }.onAppear {
                 Task {
                     await viewmodel.getHeroes()
                 }
-            }.onDisappear {
-                viewmodel.goingToDetailView()
-            }.makeToolbarItems(addItem: viewmodel.addRandomHero, deleteItem: viewmodel.deleteAllHeroes)
-                .navigationTitle("Heroes")
+            }.onDisappear { viewmodel.goingToDetailView() }
+            .makeToolbarItems(addItem: viewmodel.addRandomHero, deleteItem: viewmodel.deleteAllHeroes)
+            .navigationTitle("Heroes")
         }.navigationViewStyle(.stack)
-            .alert(isPresented: $viewmodel.triggerErrorAlert, content: {
-                return Alert(title: Text("An Error Has Occurred"),
-                             message: Text(viewmodel.error?.localizedDescription ?? ""),
-                             dismissButton: .default(Text("OK")))
-            }).searchable(text: $query) .onChange(of: query) { newQuery in
-                    viewmodel.triggerSearch(for: newQuery)
-                }
-
-            .loaderViewWrapper(isLoading: viewmodel.isLoading)
+        .loaderViewWrapper(isLoading: viewmodel.isLoading)
+        .withErrorHandling(error: $viewmodel.viewModelError)
     }
 
     // Required Function for deleting an element from a swipe

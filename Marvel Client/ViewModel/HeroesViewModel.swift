@@ -6,22 +6,27 @@
 //
 
 import Foundation
-
 import Combine
 import SwiftUI
-
-enum HeroesViewModelError: Error {
-    case couldNotUpdateHeroe
-    case notConnectedToInternet
-}
 
 // Marked as main actor because is attach to the view, an actor execute actions in the main thread
 @MainActor
 class HeroesViewModel: BaseViewModel {
-    typealias EntityDTO = HeroDTO
-    typealias Repo = HeroesRepository
 
-    @Published var heroes: [HeroDTO] = []
+    var repository: HeroesRepository
+    var page: Int = 0
+
+    /// Number of heroes the API would return
+    var limit: Int { 10 }
+
+    /// Parameter required for pagination in order to retrieve heroes
+    var offset: Int = 0
+
+    /// For getting next X = limit results
+    var nextOffset: Int { result.count + limit }
+
+    /// Prevent requesting heroes when coming back from detailed view
+    var comingFromDetailView: Bool = false
 
     var result: [HeroDTO] = [] {
         didSet {
@@ -43,26 +48,9 @@ class HeroesViewModel: BaseViewModel {
         }
     }
 
-    // RequestError from service or CoreDataError from dao
-    @Published var error: Error?
-
+    @Published var heroes: [HeroDTO] = []
+    @Published var viewModelError: HeroesViewModelError?
     @Published var isLoading: Bool = true
-
-    @Published var triggerInternetAlert: Bool = false
-    @Published var triggerErrorAlert: Bool = false
-
-    var repository: HeroesRepository
-
-    var page: Int = 0
-    // Number of heroes the API would return
-    var limit: Int { 10 }
-    // Parameter required for pagination in order to retrieve heroes
-    var offset: Int = 0
-    // For getting next X = limit results
-    var nextOffset: Int { result.count + limit }
-
-    // Prevent requesting heroes when coming back from detailed view
-    var comingFromDetailView: Bool = false
 
     required init(repository: HeroesRepository = DependencyInjector.getHeroesRepository()) {
         self.repository = repository
@@ -73,7 +61,6 @@ class HeroesViewModel: BaseViewModel {
     func getHeroes(isRefreshing: Bool = false) async {
         cleanErrors()
         do {
-
             guard  !comingFromDetailView || isRefreshing else {
                 self.comingFromDetailView.toggle()
                 return
@@ -85,7 +72,6 @@ class HeroesViewModel: BaseViewModel {
             page += 1
             let newResult = try await repository.getHeroes(limit: limit,
                                                            page: page,
-
                                                            offset: nextOffset).sortedByFavorite()
 
             withAnimation {
@@ -95,21 +81,18 @@ class HeroesViewModel: BaseViewModel {
             result = newResult
 
         } catch RequestError.offline {
-            self.triggerInternetAlert = true
+            self.viewModelError = .notConnectedToInternet
             self.isLoading = false
         } catch {
+            self.viewModelError = .couldNotDeleteHeroe
             self.isLoading = false
-            self.error = error
-            self.triggerErrorAlert = true
         }
     }
 
     func addRandomHero() async {
         let randomUser = HeroDTO.random
-
         self.result.append(randomUser)
         self.result = result.sortedByFavorite()
-
         Task {
             await self.repository.add(hero: randomUser)
         }
@@ -121,16 +104,13 @@ class HeroesViewModel: BaseViewModel {
             self.page = 0
             try await self.repository.deleteHeroes()
         } catch {
-            self.error = error
+            self.viewModelError = .couldNotDeleteHeroe
         }
     }
 
     func deleteHero(index: Int) async throws {
-
         _ = self.result.remove(at: index)
-
         let heroeToRemove = result[index]
-
         _ = try await self.repository.delete(hero: heroeToRemove)
     }
 
@@ -143,18 +123,14 @@ class HeroesViewModel: BaseViewModel {
     }
 
     func toggleFavoriteFor(_ hero: HeroDTO) async {
-
         let heroeIndex = result.indices.filter { result[$0].id == hero.id }.first
-
         if let safeIndex = heroeIndex {
-
             result[safeIndex].isFavorite =  !result[safeIndex].isFavorite
             let heroToUpdate = result[safeIndex]
             self.result = result.sortedByFavorite()
             _ = await self.repository.update(hero: heroToUpdate)
-
         } else {
-            self.error = HeroesViewModelError.couldNotUpdateHeroe
+            self.viewModelError = .couldNotUpdateHeroe
         }
 
     }
@@ -163,22 +139,17 @@ class HeroesViewModel: BaseViewModel {
         if result.count > limit - 1 {
             do {
                 page += 1
-
                 let newResult = try await repository.getHeroes(limit: limit, page: page, offset: nextOffset)
-
                 result = newResult.sortedByFavorite()
-
             } catch RequestError.offline {
-                self.triggerInternetAlert = true
+                self.viewModelError = .notConnectedToInternet
                 self.isLoading = false
             } catch {
-
                 self.isLoading = false
 
                 // When a Task is cancelled
                 guard (error as NSError?)?.code == NSURLErrorCancelled  else {
-                    self.error = error
-                    self.triggerErrorAlert = true
+                    self.viewModelError = .unknown
                     return
                 }
             }
@@ -196,13 +167,10 @@ class HeroesViewModel: BaseViewModel {
     }
 
     func cleanErrors() {
-        self.error = nil
-        self.triggerInternetAlert = false
-        self.triggerErrorAlert = false
+        self.viewModelError = nil
     }
 
     func goingToDetailView() {
         comingFromDetailView = true
     }
-
 }
