@@ -20,7 +20,7 @@ struct DependencyInjector {
 
 class FakeQueryDAO: QueryDAO {
     func addReplacing(_ entity: HeroDTO) async -> HeroDTO {
-        return HeroDTO.random
+        return HeroDTO.randomThumbnail
     }
     func getAll() async throws -> [HeroDTO] {
         return [HeroDTO.randomThumbnail, HeroDTO.randomThumbnail]
