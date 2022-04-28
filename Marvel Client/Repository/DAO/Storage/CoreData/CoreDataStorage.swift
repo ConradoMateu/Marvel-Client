@@ -14,6 +14,7 @@ struct CoreDataStorage: Storage {
     typealias ManagedContext = NSManagedObjectContext
 
     static let shared = CoreDataStorage()
+    static let sharedTest = CoreDataStorage(isInMemoryStore: true)
 
     let persistentContainer: NSPersistentContainer
 

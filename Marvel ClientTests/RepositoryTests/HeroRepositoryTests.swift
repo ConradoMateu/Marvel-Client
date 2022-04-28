@@ -11,24 +11,25 @@ import OHHTTPStubs
 import OHHTTPStubsSwift
 
 class HeroRepositoryTests: XCTestCase {
-
-    var storage: CoreDataStorage!
-    var dao: HeroesDao!
     var heroService = HeroeService()
-    var heroRepository: HeroesRepository!
 
     @JSONFile(named: "response")
     var response: HeroeResponseDTO?
 
-    override func setUpWithError() throws {
-        self.storage = CoreDataStorage(isInMemoryStore: true)
-        self.dao = HeroesDao(storage: storage)
-        self.heroRepository = HeroesRepository(service: heroService, dao: dao)
+    override func tearDown() async throws {
+        let dao = HeroesDao(storage: CoreDataStorage.sharedTest)
+        let heroesInDB = try await dao.getAll()
+
+        for hero in heroesInDB {
+            _ = try await dao.delete(hero)
+        }
     }
 
     func testShouldCallTheAPIWhenNoDataIsCached() async throws {
 
         // GIVEN an empty database
+        let dao = HeroesDao(storage: CoreDataStorage.sharedTest)
+        let heroRepository = HeroesRepository(service: heroService, dao: dao)
         let heroesInDB = try await dao.getAll()
 
         assert(heroesInDB.isEmpty)
@@ -49,6 +50,8 @@ class HeroRepositoryTests: XCTestCase {
 
     func testShouldReturnCachedDataWhenNoPaginationIsTriggered() async throws {
 
+        let dao = HeroesDao(storage: CoreDataStorage.sharedTest)
+        let heroRepository = HeroesRepository(service: heroService, dao: dao)
         guard let safeHeros = response?.heroes[0..<5] else {
             XCTFail("Could not return decode response")
             return
@@ -72,6 +75,9 @@ class HeroRepositoryTests: XCTestCase {
     }
 
     func testShouldCallTheAPIWhenPaginationIsTriggered() async throws {
+
+        let dao = HeroesDao(storage: CoreDataStorage.sharedTest)
+        let heroRepository = HeroesRepository(service: heroService, dao: dao)
 
         guard let safeHero = response?.heroes.first else {
             XCTFail("Could not return decode response")

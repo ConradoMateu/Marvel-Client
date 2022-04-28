@@ -6,20 +6,10 @@
 //
 
 import Foundation
-
-//
-//  CoreDataDAOTests.swift
-//  Marvel ClientTests
-//
-//  Created by Conrado Mateu Gisbert on 6/3/22.
-//
-
 import XCTest
 @testable import Marvel_Client
 
 class ComicsDAOTests: XCTestCase {
-
-    var storage: CoreDataStorage!
 
     @JSONFile(named: "response")
     var response: HeroeResponseDTO?
@@ -36,15 +26,20 @@ class ComicsDAOTests: XCTestCase {
     var hero: HeroDTO!
 
     override func setUpWithError() throws {
-
         hero = heroesWithComics.randomElement()
-        // Set in memory for testing purposes to do not persist in SQL DB
-        self.storage = CoreDataStorage(isInMemoryStore: true)
+    }
+
+    override func tearDown() async throws {
+        let comicsDAO = ComicsDao(storage: CoreDataStorage.sharedTest)
+        let dbComics = try await comicsDAO.getAll()
+        for comic in dbComics {
+            _ = try await comicsDAO.delete(comic)
+        }
     }
 
     func testShouldAddComicInDB() async throws {
         let randomComic: ComicDTO! = hero.comics.randomElement()
-        let comicsDAO = ComicsDao(storage: storage)
+        let comicsDAO = ComicsDao(storage: CoreDataStorage.sharedTest)
 
         _ = await comicsDAO.addReplacing(randomComic)
         let result = try await comicsDAO.getAll()
@@ -54,7 +49,7 @@ class ComicsDAOTests: XCTestCase {
 
     func testShouldReplaceComicInDB() async throws {
         let randomComic: ComicDTO! = hero.comics.randomElement()
-        let comicsDAO = ComicsDao(storage: storage)
+        let comicsDAO = ComicsDao(storage: CoreDataStorage.sharedTest)
 
         _ = await comicsDAO.addReplacing(randomComic)
 
@@ -74,7 +69,7 @@ class ComicsDAOTests: XCTestCase {
 
         // GIVEN
         let randomComics: [ComicDTO]! = hero.comics
-        let comicsDAO = ComicsDao(storage: storage)
+        let comicsDAO = ComicsDao(storage: CoreDataStorage.sharedTest)
 
         for comic in randomComics {
             _ = await comicsDAO.addReplacing(comic)
@@ -94,7 +89,7 @@ class ComicsDAOTests: XCTestCase {
 
         // GIVEN
         let randomComics: [ComicDTO]! = hero.comics
-        let comicsDAO = ComicsDao(storage: storage)
+        let comicsDAO = ComicsDao(storage: CoreDataStorage.sharedTest)
 
         for comic in randomComics {
             _ = await comicsDAO.addReplacing(comic)
@@ -108,6 +103,7 @@ class ComicsDAOTests: XCTestCase {
         let dbComics = try await comicsDAO.getAll()
 
         // THEN
+
         assert(dbComics.isEmpty)
     }
 }

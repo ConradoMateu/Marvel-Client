@@ -29,12 +29,20 @@ class HeroesDAOTests: XCTestCase {
 
         hero = heroesWithComics.randomElement()
         // Set in memory for testing purposes to do not persist in SQL DB
-        self.storage = CoreDataStorage(isInMemoryStore: true)
+        self.storage = CoreDataStorage.sharedTest
+    }
+
+    override func tearDown() async throws {
+        let heroesDAO = HeroesDao(storage: CoreDataStorage.sharedTest)
+        let dbHeroes = try await heroesDAO.getAll()
+        for hero in dbHeroes {
+            _  = try await heroesDAO.delete(hero)
+        }
     }
 
     func testShouldCreateHeroInDB() async throws {
         // GIVEN
-        let heroesDAO = HeroesDao(storage: storage)
+        let heroesDAO = HeroesDao(storage: CoreDataStorage.sharedTest)
 
         // WHEN
         _ = await heroesDAO.addReplacing(hero)
@@ -46,7 +54,7 @@ class HeroesDAOTests: XCTestCase {
 
     func testShouldReplaceHeroInDB() async throws {
         // GIVEN
-        let heroesDAO = HeroesDao(storage: storage)
+        let heroesDAO = HeroesDao(storage: CoreDataStorage.sharedTest)
 
         _ = await heroesDAO.addReplacing(hero)
 
@@ -66,7 +74,7 @@ class HeroesDAOTests: XCTestCase {
     }
 
     func testShouldDeleteSingleHero() async throws {
-        let heroesDAO = HeroesDao(storage: storage)
+        let heroesDAO = HeroesDao(storage: CoreDataStorage.sharedTest)
         let someHeroes = heroesWithComics[0...2]
 
         for hero in someHeroes {
@@ -82,7 +90,7 @@ class HeroesDAOTests: XCTestCase {
     }
 
     func testShouldDeleteAllHeroes() async throws {
-        let heroesDAO = HeroesDao(storage: storage)
+        let heroesDAO = HeroesDao(storage: CoreDataStorage.sharedTest)
         let someHeroes = heroesWithComics[0...2]
 
         for hero in someHeroes {
