@@ -23,7 +23,7 @@ class FakeQueryDAO: QueryDAO {
         return HeroDTO.random
     }
     func getAll() async throws -> [HeroDTO] {
-        return [HeroDTO.random]
+        return [HeroDTO.randomThumbnail, HeroDTO.randomThumbnail]
     }
     func delete(_ entity: HeroDTO) async throws -> Bool {
         return true
