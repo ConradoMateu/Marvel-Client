@@ -22,8 +22,8 @@ class HeroRowViewTests: XCTestCase {
 
     static override func setUp() {
         let device = UIDevice.current.name
-        if device != "iPhone X" {
-            fatalError("Switch to using iPhone X for these tests.")
+        if device != "iPhone 8" {
+            fatalError("Switch to using iPhone 8 for these tests.")
         }
 
         // To SpeedUp UITests
