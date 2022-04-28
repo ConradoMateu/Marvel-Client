@@ -44,7 +44,7 @@ class HeroRowViewTests: XCTestCase {
     }
 
     func testHeroRow() throws {
-        assertSnapshot(matching: viewController, as: .image(on: .iPhone8, traits: traitDarkMode))
+        assertSnapshot(matching: viewController, as: .image(on: .iPhone8, precision: 0.90, traits: traitDarkMode))
     }
 
 }
