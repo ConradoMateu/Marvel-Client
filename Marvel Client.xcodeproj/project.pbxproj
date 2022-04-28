@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		91830DB928199DA200005DAE /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91830DB828199DA200005DAE /* ErrorHandling.swift */; };
+		91830DBB2819EBB500005DAE /* HeroesViewModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91830DBA2819EBB500005DAE /* HeroesViewModelError.swift */; };
+		91830DC3281A052D00005DAE /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 91830DC2281A052D00005DAE /* SnapshotTesting */; };
+		91830DC5281A05BB00005DAE /* HeroeRowViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91830DC4281A05BB00005DAE /* HeroeRowViewTests.swift */; };
+		91830DC7281A0E0A00005DAE /* HeroListViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91830DC6281A0E0A00005DAE /* HeroListViewTests.swift */; };
 		9B415E8F27D6686300A0E62B /* ComicsDAOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B415E8E27D6686300A0E62B /* ComicsDAOTests.swift */; };
 		9B415E9127D6A9E500A0E62B /* HeroesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B415E9027D6A9E500A0E62B /* HeroesRepository.swift */; };
 		9B415E9527D6CA8F00A0E62B /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B415E9427D6CA8F00A0E62B /* BaseViewModel.swift */; };
@@ -70,6 +75,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		91830DB828199DA200005DAE /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
+		91830DBA2819EBB500005DAE /* HeroesViewModelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesViewModelError.swift; sourceTree = "<group>"; };
+		91830DC4281A05BB00005DAE /* HeroeRowViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeRowViewTests.swift; sourceTree = "<group>"; };
+		91830DC6281A0E0A00005DAE /* HeroListViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HeroListViewTests.swift; path = "Marvel ClientTests/SnapshotTests/HeroListViewTests.swift"; sourceTree = SOURCE_ROOT; };
 		9B415E8E27D6686300A0E62B /* ComicsDAOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsDAOTests.swift; sourceTree = "<group>"; };
 		9B415E9027D6A9E500A0E62B /* HeroesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesRepository.swift; sourceTree = "<group>"; };
 		9B415E9427D6CA8F00A0E62B /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -131,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91830DC3281A052D00005DAE /* SnapshotTesting in Frameworks */,
 				9B662F9A27D44AE100A7A656 /* OHHTTPStubs in Frameworks */,
 				9B662F9C27D44AE100A7A656 /* OHHTTPStubsSwift in Frameworks */,
 			);
@@ -139,6 +149,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		91830DB728199CDC00005DAE /* ErrorHandling */ = {
+			isa = PBXGroup;
+			children = (
+				91830DB828199DA200005DAE /* ErrorHandling.swift */,
+			);
+			path = ErrorHandling;
+			sourceTree = "<group>";
+		};
+		91830DBC2819F3A500005DAE /* HeroesViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9B415E9627D6CA9800A0E62B /* HeroesViewModel.swift */,
+				91830DBA2819EBB500005DAE /* HeroesViewModelError.swift */,
+			);
+			path = HeroesViewModel;
+			sourceTree = "<group>";
+		};
+		91830DC0281A04E800005DAE /* SnapshotTests */ = {
+			isa = PBXGroup;
+			children = (
+				91830DC6281A0E0A00005DAE /* HeroListViewTests.swift */,
+				91830DC4281A05BB00005DAE /* HeroeRowViewTests.swift */,
+			);
+			path = SnapshotTests;
+			sourceTree = "<group>";
+		};
 		9B415E8B27D6335D00A0E62B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,8 +206,8 @@
 		9B415E9227D6CA7D00A0E62B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				91830DBC2819F3A500005DAE /* HeroesViewModel */,
 				9B415E9427D6CA8F00A0E62B /* BaseViewModel.swift */,
-				9B415E9627D6CA9800A0E62B /* HeroesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -280,6 +316,7 @@
 		9BBC2CAC27D003AF00BEAA26 /* Marvel ClientTests */ = {
 			isa = PBXGroup;
 			children = (
+				91830DC0281A04E800005DAE /* SnapshotTests */,
 				9BC4CF3427D8254200883A8D /* RepositoryTests */,
 				9B415E8D27D6681C00A0E62B /* APITests */,
 				9B415E8C27D6680300A0E62B /* CoreDataDAOTests */,
@@ -300,6 +337,7 @@
 		9BBC2CDE27D0570A00BEAA26 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				91830DB728199CDC00005DAE /* ErrorHandling */,
 				9BBC2CF627D072AC00BEAA26 /* ViewModifiers */,
 				9BBC2CDF27D0570F00BEAA26 /* JSON */,
 				9B662FA027D4777900A7A656 /* MD5.swift */,
@@ -408,6 +446,7 @@
 			packageProductDependencies = (
 				9B662F9927D44AE100A7A656 /* OHHTTPStubs */,
 				9B662F9B27D44AE100A7A656 /* OHHTTPStubsSwift */,
+				91830DC2281A052D00005DAE /* SnapshotTesting */,
 			);
 			productName = "Marvel ClientTests";
 			productReference = 9BBC2CA927D003AF00BEAA26 /* Marvel ClientTests.xctest */;
@@ -445,6 +484,7 @@
 				9BBC2CD027D033C300BEAA26 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				9BF2E0CF27D19CAE00F0E400 /* XCRemoteSwiftPackageReference "BackedCodable" */,
 				9B662F9827D44AE100A7A656 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
+				91830DC1281A052D00005DAE /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 9BBC2C9527D003AE00BEAA26 /* Products */;
 			projectDirPath = "";
@@ -494,7 +534,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"SwiftLint is not installed run: brew install swiftlint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    swiftlint autocorrect\nelse\n    echo \"SwiftLint is not installed run: brew install swiftlint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -505,8 +545,10 @@
 			files = (
 				9BBC2CEE27D0619200BEAA26 /* Toolbar.swift in Sources */,
 				9B66139F27D578E60030F853 /* Heroe+CoreDataClass.swift in Sources */,
+				91830DB928199DA200005DAE /* ErrorHandling.swift in Sources */,
 				9BBC2D0127D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */,
 				9B424D0827D3C25100B4445C /* CoreDataStorage.swift in Sources */,
+				91830DBB2819EBB500005DAE /* HeroesViewModelError.swift in Sources */,
 				9B424D0427D3293C00B4445C /* CoreDataDAO.swift in Sources */,
 				9BBC2C9A27D003AE00BEAA26 /* HeroesListView.swift in Sources */,
 				9B424D0E27D3F11D00B4445C /* Mapper.swift in Sources */,
@@ -545,10 +587,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBC2CAE27D003AF00BEAA26 /* JSONLFileTests.swift in Sources */,
+				91830DC5281A05BB00005DAE /* HeroeRowViewTests.swift in Sources */,
 				9B424D1327D40F8C00B4445C /* HeroeServiceTests.swift in Sources */,
 				9B66139627D5357E0030F853 /* HeroesDAOTests.swift in Sources */,
 				9BBC2D0227D07E5400BEAA26 /* ThemeSwitcher.swift in Sources */,
 				9B415E8F27D6686300A0E62B /* ComicsDAOTests.swift in Sources */,
+				91830DC7281A0E0A00005DAE /* HeroListViewTests.swift in Sources */,
 				9BC4CF3627D8255C00883A8D /* HeroRepositoryTests.swift in Sources */,
 				9BBC2CE627D057C300BEAA26 /* JSONFile.swift in Sources */,
 				9BBC2CEF27D0619200BEAA26 /* Toolbar.swift in Sources */,
@@ -815,6 +859,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		91830DC1281A052D00005DAE /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		9B662F9827D44AE100A7A656 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
@@ -842,6 +894,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		91830DC2281A052D00005DAE /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91830DC1281A052D00005DAE /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
 		9B662F9927D44AE100A7A656 /* OHHTTPStubs */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9B662F9827D44AE100A7A656 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;

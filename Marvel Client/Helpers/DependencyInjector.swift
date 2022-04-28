@@ -16,15 +16,14 @@ struct DependencyInjector {
     static func fakeRepository() -> HeroesRepository {
         return HeroesRepository(service: FakeHeroService(), dao: FakeQueryDAO())
     }
-
 }
 
 class FakeQueryDAO: QueryDAO {
     func addReplacing(_ entity: HeroDTO) async -> HeroDTO {
-        return HeroDTO.random
+        return HeroDTO.randomThumbnail
     }
     func getAll() async throws -> [HeroDTO] {
-        return [HeroDTO.random]
+        return [HeroDTO.randomThumbnail, HeroDTO.randomThumbnail]
     }
     func delete(_ entity: HeroDTO) async throws -> Bool {
         return true
@@ -32,16 +31,13 @@ class FakeQueryDAO: QueryDAO {
     func deleteAll() async throws -> Bool {
         return true
     }
-
 }
 
 class FakeHeroService: HeroeServiceProtocol {
-
     @JSONFile(named: "response")
      var response: HeroeResponseDTO?
 
     func getHeroes(offset: String = "0", limit: String = "10") async throws -> HeroeResponseDTO {
-
         // Delay for 3 seconds
         try await Task.sleep(nanoseconds: 3_000_000_000)
         return response!

@@ -19,7 +19,7 @@ struct LoaderModifier: ViewModifier {
         ZStack {
             content
                 .disabled(isLoading)
-                .blur(radius: isLoading ? 3 : 0)
+                .blur(radius: isLoading ? 10 : 0)
 
             if isLoading {
                 VStack {

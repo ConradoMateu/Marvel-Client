@@ -13,8 +13,13 @@ struct MarvelApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HeroesListView()
-                .preferredColorScheme(isDarkMode ? .dark : .light)
+            // When testing do not run the whole app in order to speed up things
+            if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+                        EmptyView()
+            } else {
+                HeroesListView()
+                    .preferredColorScheme(isDarkMode ? .dark : .light)
+            }
         }
     }
 }
