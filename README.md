@@ -15,6 +15,8 @@ iOS 15 Client for Marvel API with the following features:
 - Core Data persistence with Async/Await approach + One To Many Relationship
 - DAO, Repository and Dependency Injection Design Patterns
 - Unit Testing: Network Layer, CoreData DAO, Repository, JSON Decodable
+- Network Stubs for Testing
+- Snapshot Testing
 
 ## Set-Up
 
@@ -39,6 +41,7 @@ iOS 15 Client for Marvel API with the following features:
 - [Swiftlint:](https://github.com/realm/SwiftLint) linter for cleaner code.
 - [CachedAsyncImages:](https://github.com/lorenzofiamingo/swiftui-cached-async-image) Wrapper for Apple’s AsyncImage class
      to cache images.
+- [Snapshot Testing:](https://github.com/pointfreeco/swift-snapshot-testing) framework used to compare different screenshots
 
 ## View Use Cases
 
@@ -53,6 +56,7 @@ iOS 15 Client for Marvel API with the following features:
 -	No Internet Connection Pop-Up
 -	Empty State
 -	Persistent Data
+- Filtering
 
 ## Screenshots
 
