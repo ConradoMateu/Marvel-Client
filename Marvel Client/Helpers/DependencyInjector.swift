@@ -42,4 +42,3 @@ class FakeHeroService: HeroeServiceProtocol {
         return response!
     }
 }
-
