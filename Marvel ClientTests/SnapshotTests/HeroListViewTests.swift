@@ -40,7 +40,7 @@ class HeroListViewTests: XCTestCase {
         let viewModel = HeroesViewModel(repository: DependencyInjector.fakeRepository())
         let mockHeroRow = HeroesListView(viewmodel: viewModel)
         viewController = UIHostingController(rootView: mockHeroRow)
-        assertSnapshot(matching: viewController, as: .image(on: .iPhoneX, traits: traitDarkMode))
+        assertSnapshot(matching: viewController, as: .image(on: .iPhone8, traits: traitDarkMode))
     }
 
     @MainActor
@@ -50,7 +50,7 @@ class HeroListViewTests: XCTestCase {
         viewController = UIHostingController(rootView: mockHeroRow)
         viewModel.heroes = [HeroDTO.randomThumbnail, HeroDTO.randomThumbnail]
         viewModel.isLoading = false
-        assertSnapshot(matching: viewController, as: .image(on: .iPhoneX, traits: traitDarkMode))
+        assertSnapshot(matching: viewController, as: .image(on: .iPhone8, traits: traitDarkMode))
     }
 
     @MainActor
@@ -60,7 +60,7 @@ class HeroListViewTests: XCTestCase {
         viewController = UIHostingController(rootView: mockHeroRow)
         viewModel.heroes = []
         viewModel.isLoading = false
-        assertSnapshot(matching: viewController, as: .image(on: .iPhoneX, traits: traitDarkMode))
+        assertSnapshot(matching: viewController, as: .image(on: .iPhone8, traits: traitDarkMode))
     }
 
 }
