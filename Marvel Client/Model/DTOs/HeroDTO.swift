@@ -74,9 +74,18 @@ extension HeroDTO {
 
     static var random: HeroDTO {
         HeroDTO(id: UUID().uuidString,
-                 name: "0 - This hero is a test",
+                 name: "This hero is a test",
                  description: "This is a description for a random user",
                  imageURLString: "http://i.annihil.us/u/prod/marvel/i/mg/3/80/4c00358ec7548.jpg",
+                 comics: [],
+                 isFavorite: false)
+    }
+
+    static var randomThumbnail: HeroDTO {
+        HeroDTO(id: UUID().uuidString,
+                 name: "This hero is a test",
+                 description: "This is a description for a random user",
+                 imageURLString: "http://i.annihil.us",
                  comics: [],
                  isFavorite: false)
     }

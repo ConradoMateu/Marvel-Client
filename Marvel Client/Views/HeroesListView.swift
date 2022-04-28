@@ -57,7 +57,7 @@ struct HeroesListView: View {
             viewmodel.triggerSearch(for: newQuery)
         }
     }
-    
+
     func emptyView() -> some View {
         NavigationView {
             Button( action: {
