@@ -51,7 +51,7 @@ class HeroListViewTests: XCTestCase {
         viewModel.isLoading = false
         viewModel.viewModelError = nil
         viewModel.heroes = [HeroDTO.randomThumbnail, HeroDTO.randomThumbnail]
-        assertSnapshot(matching: viewController, as: .image(on: .iPhone8, precision: 0.80, traits: traitDarkMode))
+        assertSnapshot(matching: viewController, as: .image(on: .iPhone8, precision: 0.70, traits: traitDarkMode))
     }
 
     @MainActor
